@@ -1,0 +1,36 @@
+{#page for administrator panel#}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Panneau administrateur</h1>
+
+<nav>
+    <a href="{{ path('user_by_admin') }}">entrer un nouvel eleve</a>
+</nav>
+<table>
+    <tr>
+        <th></th>
+        <th></th>
+        <th>id</th>
+        <th>nom</th>
+        <th>prenom</th>
+        <th>mot de passe</th>
+        <th>code utilisateur</th>
+        <th>id_rank</th>
+    </tr>
+    {% for i in user %}
+    <tr>
+        <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+        <td><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+                <td>{{ i.id }}</td>
+                <td>{{ i.lastname }}</td>
+                <td>{{ i.firstname }}</td>
+                <td>{{ i.password }}</td>
+                <td>{{ i.usercode }}</td>
+                <td>{{ i.idrank }}</td>
+            </tr>
+
+
+        {% endfor %}
+    </table>
+{% endblock %}

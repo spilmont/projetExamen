@@ -1,0 +1,18 @@
+{# twig for base model#}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}<link rel="stylesheet" href="{{ asset("css/style.css") }}">{% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <header> <h1>ecole kiesitpa</h1></header>
+
+        {% block javascripts %}{% endblock %}
+        {% endblock %}
+
+    </body>
+</html>
