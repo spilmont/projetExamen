@@ -42,10 +42,9 @@ class adminController extends AbstractController
             ->add('firstname', TextType::class, ['label' => 'prénom : '])
             ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
             ->add('usercode', TextType::class, ['label' => 'code élève : '])
-            ->add('idrank', IntegerType::class)
+            ->add('idrank', IntegerType::class, ['attr' => ['min' => 1, 'max' => 3]])
             ->add('save', SubmitType::class)
             ->getForm();
-
 
 
         $form->handleRequest($request);
@@ -77,7 +76,7 @@ class adminController extends AbstractController
 
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user = $repository->findAll();
-        return $this->render("admin.html.twig", ["user" => $user,]);
+        return $this->render("admin.html.twig", ["user" => $user]);
 
 
     }
@@ -118,7 +117,6 @@ class adminController extends AbstractController
         // for update user by admin
 
 
-
         // use entity manager
         $em = $this->getDoctrine()->getManager();
 
@@ -134,7 +132,6 @@ class adminController extends AbstractController
             ->add('idrank', IntegerType::class)
             ->add('save', SubmitType::class)
             ->getForm();
-
 
 
         $form->handleRequest($request);
@@ -154,5 +151,36 @@ class adminController extends AbstractController
         return $this->render('updatebyadmin.html.twig', ['update' => $form->createView()]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/admin",name="admin")
+     */
+    public function filter(Request $request)
+    {
 
+        $lastname = NULL;
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository(User::class)->findAll();
+
+        $form = $this->createFormBuilder($user)
+            ->add('lastname', TextType::class, ['label' => 'nom','required'=>false])
+            ->add('save', SubmitType::class, ['label'=>'filtrer'])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $lastname = $form['lastname']->getData();
+
+        }
+
+       return  $this->render('admin.html.twig', ['user' => $user,
+            'filter' => $form->createView(),
+            'lastname' => $lastname
+        ]);
+
+    }
 }

@@ -7,6 +7,7 @@
 <nav>
     <a href="{{ path('user_by_admin') }}">entrer un nouvel eleve</a>
 </nav>
+    {{ form(filter) }}
 <table>
     <tr>
         <th></th>
@@ -18,7 +19,8 @@
         <th>code utilisateur</th>
         <th>id_rank</th>
     </tr>
-    {% for i in user %}
+    {%if lastname is empty  %}
+    {% for i in user  %}
     <tr>
         <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
         <td><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
@@ -32,5 +34,24 @@
 
 
         {% endfor %}
-    </table>
+    {% endif %}
+    {% if lastname is not empty  %}
+    {% for i in user  if i.lastname == lastname %}
+        <tr>
+            <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+            <td><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+            <td>{{ i.id }}</td>
+            <td>{{ i.lastname }}</td>
+            <td>{{ i.firstname }}</td>
+            <td>{{ i.password }}</td>
+            <td>{{ i.usercode }}</td>
+            <td>{{ i.idrank }}</td>
+        </tr>
+
+
+    {% endfor %}
+    {% endif %}
+
+
+</table>
 {% endblock %}
