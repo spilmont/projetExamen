@@ -2,17 +2,24 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}<link rel="stylesheet" href="{{ asset("css/style.css") }}">{% endblock %}
-    </head>
-    <body>
-        {% block body %}
-            <header> <h1>ecole kiesitpa</h1></header>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset("css/style.css") }}">{% endblock %}
+</head>
+<body>
 
-        {% block javascripts %}{% endblock %}
-        {% endblock %}
+    <header>{% block header %}
+            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+                <p> Bonjours <b>{{ app.user.lastname }} {{ app.user.firstname }}</b></p> <a href=" {{ logout_path('main') }} ">Déconection</a>
+            {% endif %}
+            {% endblock %}
+    </header>
+    {% block body %}
 
-    </body>
+
+
+    {% block javascripts %}{% endblock %}
+{% endblock %}</body>
 </html>

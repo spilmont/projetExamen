@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class skillController extends AbstractController
 {
     /**
-     * @Route("/create/skill", name="create_skill")
+     * @Route("admin/create/skill", name="create_skill")
      */
     public function create(Request $request){
 
@@ -54,7 +54,7 @@ class skillController extends AbstractController
     }
 
     /**
-     * @Route("skill", name="show_skill")
+     * @Route("admin/skill", name="show_skill")
      */
     public function show(){
 
@@ -69,7 +69,7 @@ class skillController extends AbstractController
     /**
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("skill/delete/{id}", name="delete_skill")
+     * @Route("admin/skill/delete/{id}", name="delete_skill")
      */
     public function delete($id){
 
@@ -85,7 +85,7 @@ class skillController extends AbstractController
     }
 
     /**
-     * @Route("skill/update/{id}", name="update_skill")
+     * @Route("admin/skill/update/{id}", name="update_skill")
      */
     public function update(Request $request, $id){
 

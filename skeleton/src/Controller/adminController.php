@@ -10,6 +10,8 @@
 namespace App\Controller;
 
 
+use App\Repository\UserRepository;
+use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,12 +24,14 @@ use App\Entity\User;
 
 // controller for CRUD For  administrator panel
 
+
 class adminController extends AbstractController
 {
 
 
+
     /**
-     * @Route("/createuserbyadmin", name="user_by_admin")
+     * @Route("/admin/createuserbyadmin", name="user_by_admin")
      */
     public function create(Request $request)
     {

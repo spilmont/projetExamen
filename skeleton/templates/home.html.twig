@@ -2,12 +2,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Bienvenue !  {% endblock %}
+
+
+    {% block header %}
+        {% include 'security/login.html.twig' %}
+    {% endblock %}
+
 {% block body %}
-
     <p>Bienvenues cher parents,<br>
-    Ce site vous permet de voir les note de votre enfants dans les different matiere,<br>
+        Ce site vous permet de voir les note de votre enfants dans les different matiere,<br>
         ainsi q'un espace commentaire pour pouvoir communiquer avec le profeseur de votre enfant.<br></p>
+{% endblock %}
 
-
-
-{%  endblock %}

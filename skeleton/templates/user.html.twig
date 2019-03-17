@@ -1,0 +1,13 @@
+{#page for administrator panel#}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+       <h1> Notes de l'élèves : {{ nom }} {{ prenom }}</h1>
+
+       {% for skill in skills %}
+
+              {{ skill.skill }} :<br>
+
+       {% endfor %}
+{% endblock %}
