@@ -30,7 +30,7 @@ class gradesController extends AbstractController
      */
     public function Create(Request $request, $idskill, $class)
     {
-       $grades = new Grade();
+
 
         $reposkill = $this->getDoctrine()->getRepository(Skill::class);
         $skill = $reposkill->find($idskill);
@@ -38,16 +38,24 @@ class gradesController extends AbstractController
         $users = $repouser->findBy(["class"=>$class]);
         $repograde = $this->getDoctrine()->getRepository(Grade::class);
 
+
         if( !empty($_POST)){
 
         foreach ($users as $user){
+            $grades = new Grade();
+
+            $formgrade = filter_var($_POST["grade".$user->getId()],FILTER_SANITIZE_NUMBER_INT);
 
         $grades->setSkill($skill);
-        $grades->getUser($user);
+        $grades->setUser($user);
+        $grades->setGrades($formgrade);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($grades);
+            $em->flush();
+
+
         }
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($grades);
-        $em->flush();
+
 
 
     }
@@ -73,6 +81,8 @@ class gradesController extends AbstractController
             ])
             ->add('save',SubmitType::class)
             ->getForm();
+
+
 
         $form->handleRequest($request);
 
