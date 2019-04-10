@@ -24,7 +24,7 @@
         <th>id_rank</th>
         <th>class</th>
     </tr>
-    {%if lastname is empty  %}
+    {%if lastname is empty and class is empty %}
     {% for i in user  %}
     <tr>
         <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
@@ -42,21 +42,41 @@
         {% endfor %}
     {% endif %}
     {% if lastname is not empty  %}
-    {% for i in user  if i.lastname == lastname %}
-        <tr>
-            <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
-            <td><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
-            <td>{{ i.id }}</td>
-            <td>{{ i.lastname }}</td>
-            <td>{{ i.firstname }}</td>
-            <td>{{ i.password }}</td>
-            <td>{{ i.usercode }}</td>
-            <td>{{ i.idrank }}</td>
-        </tr>
+        {% for i in user  if i.lastname == lastname %}
+            <tr>
+                <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                <td><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+                <td>{{ i.id }}</td>
+                <td>{{ i.lastname }}</td>
+                <td>{{ i.firstname }}</td>
+                <td>{{ i.password }}</td>
+                <td>{{ i.usercode }}</td>
+                <td>{{ i.idrank }}</td>
+                <td>{{ i.class }}</td>
+            </tr>
 
 
-    {% endfor %}
+        {% endfor %}
     {% endif %}
+    {% if class is not empty  %}
+        {% for i in user  if i.class == class %}
+            <tr>
+                <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                <td><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+                <td>{{ i.id }}</td>
+                <td>{{ i.lastname }}</td>
+                <td>{{ i.firstname }}</td>
+                <td>{{ i.password }}</td>
+                <td>{{ i.usercode }}</td>
+                <td>{{ i.idrank }}</td>
+                <td>{{ i.class }}</td>
+            </tr>
+
+
+        {% endfor %}
+    {% endif %}
+
+
 
 
 </table>

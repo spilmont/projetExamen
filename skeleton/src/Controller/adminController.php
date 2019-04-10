@@ -168,6 +168,7 @@ class adminController extends AbstractController
     {
 
         $lastname = NULL;
+        $class = null;
 
         $em = $this->getDoctrine()->getManager();
 
@@ -175,19 +176,27 @@ class adminController extends AbstractController
 
         $form = $this->createFormBuilder($user)
             ->add('lastname', TextType::class, ['label' => 'nom','required'=>false])
+
+            ->add('class', ChoiceType::class, ['label' => 'classe','required'=>false,
+                'choices'=>["tous"=>"","CP"=>"CP",'CE1'=>'CE1','CE2'=>'CE2','CM1'=>'CM1','CM2'=>'CM2']])
             ->add('save', SubmitType::class, ['label'=>'filtrer'])
             ->getForm();
+
+
+
+
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $lastname = $form['lastname']->getData();
-
+            $class = $form['class']->getData();
         }
 
        return  $this->render('admin/admin.html.twig', ['user' => $user,
             'filter' => $form->createView(),
-            'lastname' => $lastname
+            'lastname' => $lastname,
+            'class'=> $class
         ]);
 
     }
