@@ -31,6 +31,7 @@ class skillController extends AbstractController
 
         $skill = new Skill();
 
+
         // create forbuilder for skill
 
         $form = $this->createFormBuilder($skill)
@@ -47,8 +48,7 @@ class skillController extends AbstractController
 
             return $this->redirectToRoute('show_skill');
         }
-
-        return $this->render('createskill.html.twig',['skill'=>$form->createView()
+        return $this->render('admin/createskill.html.twig',['skill'=>$form->createView()
         ]);
 
     }
@@ -62,7 +62,9 @@ class skillController extends AbstractController
 
         $repository = $this->getDoctrine()->getRepository(Skill::class);
         $skill = $repository->findAll();
-        return $this->render("skill.html.twig", ["skill" => $skill,]);
+
+        return $this->render("admin/skill.html.twig", ["skill" => $skill,]);
+
 
     }
 
@@ -108,7 +110,7 @@ class skillController extends AbstractController
             return $this->redirectToRoute('show_skill');
         }
 
-         return $this->render('updateskill.html.twig',['update'=>$form->createView()
+         return $this->render('admin/updateskill.html.twig',['update'=>$form->createView()
          ]);
     }
 

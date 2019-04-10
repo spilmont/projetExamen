@@ -13,6 +13,7 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -47,6 +48,7 @@ class adminController extends AbstractController
             ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
             ->add('usercode', TextType::class, ['label' => 'code élève : '])
             ->add('idrank', IntegerType::class, ['attr' => ['min' => 1, 'max' => 3]])
+            ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
             ->add('save', SubmitType::class)
             ->getForm();
 
@@ -65,7 +67,7 @@ class adminController extends AbstractController
         }
 
 
-        return $this->render('createuseradmin.html.twig', [
+        return $this->render('admin/createuseradmin.html.twig', [
             'user' => $form->createView(),
         ]);
 
@@ -80,7 +82,7 @@ class adminController extends AbstractController
 
         $repository = $this->getDoctrine()->getRepository(User::class);
         $user = $repository->findAll();
-        return $this->render("admin.html.twig", ["user" => $user]);
+        return $this->render("admin/admin.html.twig", ["user" => $user]);
 
 
     }
@@ -134,6 +136,8 @@ class adminController extends AbstractController
             ->add('password', TextType::class, ['label' => 'mot de passe : '])
             ->add('usercode', TextType::class, ['label' => 'code élève : '])
             ->add('idrank', IntegerType::class)
+            ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"
+                                                        ,'ProfCP'=>'ProfCP','ProfCE1'=>'ProfCE1','ProfCE2'=>'ProfCE2','ProfCM1'=>'ProfCM1','ProfCM2'=>'ProfCM2']])
             ->add('save', SubmitType::class)
             ->getForm();
 
@@ -152,7 +156,7 @@ class adminController extends AbstractController
         }
 
 
-        return $this->render('updatebyadmin.html.twig', ['update' => $form->createView()]);
+        return $this->render('admin/updatebyadmin.html.twig', ['update' => $form->createView()]);
     }
 
     /**
@@ -181,7 +185,7 @@ class adminController extends AbstractController
 
         }
 
-       return  $this->render('admin.html.twig', ['user' => $user,
+       return  $this->render('admin/admin.html.twig', ['user' => $user,
             'filter' => $form->createView(),
             'lastname' => $lastname
         ]);

@@ -7,11 +7,31 @@ header{
     background-color: cornflowerblue;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius:  20px;
-    height: 100px;
+    height: 120px;
     color: white;
 
 }
 
 input{
     border-radius: 20px;
+}
+
+#error{
+
+    font-size: 20px;
+}
+
+.buttonnav{
+    padding: 4px 2px 4px 2px;
+    text-decoration: none;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 20px;
+
+}
+
+.buttonnav:hover{
+
+    background-color: red;
+
 }

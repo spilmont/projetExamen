@@ -4,9 +4,13 @@
 {% block body %}
 <h1>Panneau administrateur</h1>
 
-<nav>
-    <a href="{{ path('user_by_admin') }}">entrer un nouvel eleve</a>
-</nav>
+
+    <a class="buttonnav"  href="{{ path('user_by_admin') }}">entrer un nouvel eleve</a>
+    <a class="buttonnav"  href="{{ path('show_skill') }}">vers les compétences</a>
+    <a class="buttonnav"  href="{{ path('choice_grade') }}"> enregistrement des notes</a>
+
+
+
     {{ form(filter) }}
 <table>
     <tr>
@@ -18,6 +22,7 @@
         <th>mot de passe</th>
         <th>code utilisateur</th>
         <th>id_rank</th>
+        <th>class</th>
     </tr>
     {%if lastname is empty  %}
     {% for i in user  %}
@@ -30,6 +35,7 @@
                 <td>{{ i.password }}</td>
                 <td>{{ i.usercode }}</td>
                 <td>{{ i.idrank }}</td>
+                <td>{{ i.class }}</td>
             </tr>
 
 

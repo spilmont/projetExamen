@@ -5,7 +5,7 @@
     <h1>Panneau administrateur</h1>
 
     <nav>
-        <a href="{{ path('create_skill') }}">entrer une nouvelle compétence</a>
+        <a class="buttonnav" href="{{ path('create_skill') }}">entrer une nouvelle compétence</a>
     </nav>
     <table>
         <tr>
@@ -13,14 +13,12 @@
             <th></th>
             <th>id</th>
             <th>compétence</th>
-
         </tr>
         {% for i in skill %}
             <tr>
                 <td><a href="{{ path('delete_skill',{'id': i.id }) }}"> suprimer </a></td>
                 <td><a href="{{ path('update_skill',{'id': i.id }) }}"> modifier</a></td>
                 <td>{{ i.id }}</td>
-                <td>{{ i.skill }}</td>
 
 
 

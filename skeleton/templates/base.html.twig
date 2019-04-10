@@ -11,8 +11,9 @@
 <body>
 
     <header>{% block header %}
+            <h1>Groupe Scolaire Kiésistpa</h1>
             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                <p> Bonjours <b>{{ app.user.lastname }} {{ app.user.firstname }}</b></p> <a href=" {{ logout_path('main') }} ">Déconection</a>
+                <p> <b>Bonjour {{ app.user.lastname }} {{ app.user.firstname }}</b> <a href=" {{ logout_path('main') }} ">Déconection</a></p>
             {% endif %}
             {% endblock %}
     </header>
