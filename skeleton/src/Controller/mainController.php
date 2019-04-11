@@ -17,6 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+
+
+
 //main controller for show the different page of website
 
 class mainController extends securityController
@@ -62,6 +65,24 @@ class mainController extends securityController
         $lastname = $user->getLastname();
         $firstname = $user->getFirstname();
         $grades = $repograde->findBy(["user" => $user->getId(), "skill" => $skills]);
+
+
+        $pp= [];
+        foreach ( $grades as $grade ){
+
+            $pp[]= $grade->getskill()->getskill();
+            $pp[] += $grade->getgrades();
+
+
+        }
+
+
+      $this->json($pp);
+
+
+
+
+
 
 
 

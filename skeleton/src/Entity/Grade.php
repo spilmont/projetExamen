@@ -71,4 +71,8 @@ class Grade
 
         return $this;
     }
+    public function __toString()
+    {
+      return (string) $this->getGrades();
+    }
 }

@@ -2,11 +2,13 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
+
+
        <h1> Notes de l'élèves : {{ nom }} {{ prenom }}</h1>
 
-       {% for key, skill in skills %}
+       {% for key, grade in grades %}
 
-              {{ skill }} : {{ grades[key].grades}}<br>
+              {{ grade.skill }} : {{ grades[key].grades}}<br>
 
        {% endfor %}
 
