@@ -4,6 +4,7 @@
 
 
 
+
        <h1> Notes de l'élèves : {{ nom }} {{ prenom }}</h1>
 
        {% for key, grade in grades %}
@@ -12,4 +13,18 @@
 
        {% endfor %}
 
+    <input type="button" id="lll">
+
+    <div id="demo"></div>
+
+
+    <script type="text/javascript">
+
+        var elt= {{objgrade|raw}};
+        console.log(elt);
+
+
+
+    </script>
 {% endblock %}
+

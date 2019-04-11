@@ -11,6 +11,7 @@ namespace App\Controller;
 use App\Entity\Skill;
 use App\Entity\User;
 use App\Entity\Grade;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -67,28 +68,19 @@ class mainController extends securityController
         $grades = $repograde->findBy(["user" => $user->getId(), "skill" => $skills]);
 
 
-        $pp= [];
-        foreach ( $grades as $grade ){
+        $pp = [];
+        foreach ($grades as $grade) {
 
-            $pp[]= $grade->getskill()->getskill();
-            $pp[] += $grade->getgrades();
-
+            $pp[] = ["label" => $grade->getskill()->getskill(), "value" => $grade->getgrades()];
 
         }
 
+        $objgrade = json_encode($pp);
 
-      $this->json($pp);
-
-
-
-
-
-
-
-
-
-        return $this->render('user.html.twig', ['nom' => $lastname, "prenom" => $firstname, "skills" => $skills, 'grades' => $grades]);
+        return $this->render('user.html.twig', ['nom' => $lastname, "prenom" => $firstname, "skills" => $skills, 'grades' => $grades, "objgrade" => $objgrade]);
 
 
     }
+
+
 }
