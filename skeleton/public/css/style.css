@@ -41,5 +41,20 @@ input{
     height: 300px;
     margin-left: auto;
     margin-right: auto;
+}
 
+#comment-main-box{
+    width: 80%;
+    border: red solid ;
+    border-radius: 20px;
+    height: 300px;
+    margin: auto;
+}
+#comment-title{
+    border-bottom: red solid;
+    font-size: 20px;
+    text-align: center;
+}
+h5{
+    text-align: center;
 }
