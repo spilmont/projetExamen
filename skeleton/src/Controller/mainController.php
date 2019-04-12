@@ -71,7 +71,7 @@ class mainController extends securityController
         $pp = [];
         foreach ($grades as $grade) {
 
-            $pp[] = ["label" => $grade->getskill()->getskill(), "value" => $grade->getgrades()];
+            $pp[] = ["skill" => $grade->getskill()->getskill(), "grade" => $grade->getgrades()];
 
         }
 

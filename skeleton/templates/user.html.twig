@@ -19,30 +19,40 @@
 
        {% endfor %}
 
-    <input type="button" id="lll">
 
-    <canvas id="myChart"></canvas>
+
+    <div id="pppp"><canvas id="myChart" ></canvas></div>
 
 
     <script type="text/javascript">
-        var lab = [];
-        var elt = {{ objgrade |raw }};
-            console.log(elt);
-            var test = JSON.stringify(elt);
-            alert(test);
+        var skills = [];
+        var grades = [];
+        var elt = {{ objgrade |  raw  }}
 
 
-            console.log(test);
+
+
+        for(let i =0;i<elt.length;i++){
+
+         var skill = elt[i].skill;
+         skills.push(skill);
+
+         var grade = elt[i].grade;
+         grades.push(grade)
+
+        }
+
+ console.log(skills);
+
+
+
+
+
 
         var ctx = document.getElementById('myChart').getContext('2d');
 
 
-            for(let i =0;i<i;i++){
-                lab += elt[i].label;
 
-            }
-
-        console.log('lab: '+lab);
 
 
 
@@ -53,17 +63,34 @@
                 // The data for our dataset
 
                 data: {
-                    labels: ['francais','anglais','pinard'],
+                    labels: skills,
                     datasets: [{
                         label: 'note',
-                        backgroundColor: 'rgb(153,255,255)',
-                        borderColor: 'rgb(153,255,255)',
-                        data: [12,4,19]
+
+                        backgroundColor: "transparent",
+                        borderColor: 'rgb(0,0,255)',
+                        data: grades
                     }]
                 },
 
-                // Configuration options go here
-                options: {}
+                options : {
+                    scale: {
+
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0,
+                            max: 20,
+                            stepSize: 2,
+                            lineHeight: 2
+                        },
+                        pointLabels: {
+                            fontSize: 12
+                        }
+                    },
+                    legend: {
+                        display: false
+                    },
+                }
 
             });
 

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1> enregistrement des notes de {{ users.lastname }} {{ users.firstname }} de la classe de {{ users.class }}</h1>
+
+    <form method="post" action="">
+        {% for skill in skills %}
+
+            <label for="grade{{ skill.id }}">{{ skill }} </label>
+            <input type="number" name="grade{{ skill.id }}" id="grade{{ skill.id }}" min="0" max="20"><br>
+
+
+        {% endfor %}
+        <input type="submit">
+    </form>
+
+
+{% endblock %}

@@ -7,7 +7,7 @@
 
     <a class="buttonnav"  href="{{ path('user_by_admin') }}">entrer un nouvel eleve</a>
     <a class="buttonnav"  href="{{ path('show_skill') }}">vers les compétences</a>
-    <a class="buttonnav"  href="{{ path('choice_grade') }}"> enregistrement des notes</a>
+    <a class="buttonnav"  href="{{ path('choice_grade') }}"> enregistrement des notes par classe</a>
 
 
 
@@ -23,6 +23,7 @@
         <th>code utilisateur</th>
         <th>id_rank</th>
         <th>class</th>
+        <th>note</th>
     </tr>
     {%if lastname is empty and class is empty %}
     {% for i in user  %}
@@ -36,6 +37,11 @@
                 <td>{{ i.usercode }}</td>
                 <td>{{ i.idrank }}</td>
                 <td>{{ i.class }}</td>
+                <td>
+                    {% if i.idrank == 3 %}
+                    <a href="{{ path('create_grade_user',{'iduser': i.id}) }}">noter</a>
+                    {% endif %}
+                </td>
             </tr>
 
 

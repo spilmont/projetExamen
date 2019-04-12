@@ -12,7 +12,7 @@ namespace App\Controller;
 use App\Entity\Grade;
 use App\Entity\Skill;
 use App\Entity\User;
-use App\Form\GradeType;
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Tests\Compiler\G;
@@ -26,9 +26,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class gradesController extends AbstractController
 {
     /**
-     * @Route("admin/{class}/{idskill}/grade",name="create_grade")
+     * @Route("admin/{class}/{idskill}/gradetoclass",name="create_grade_class")
      */
-    public function Create(Request $request, $idskill, $class)
+    public function Createtoclass(Request $request, $idskill, $class)
     {
 
 
@@ -36,7 +36,7 @@ class gradesController extends AbstractController
         $skill = $reposkill->find($idskill);
         $repouser = $this->getDoctrine()->getRepository(User::class);
         $users = $repouser->findBy(["class"=>$class]);
-        $repograde = $this->getDoctrine()->getRepository(Grade::class);
+
 
 
         if( !empty($_POST)){
@@ -55,12 +55,48 @@ class gradesController extends AbstractController
 
 
         }
+    }
+        return $this->render("admin\creategradetoclass.html.twig", ["users"=>$users,"skill" => $skill]);
+    }
 
 
+    /**
+     * @Route("admin/{iduser}/gradetouser",name="create_grade_user")
+     */
+    public function Createtouser(Request $request, $iduser){
+
+        $repouser = $this->getDoctrine()->getRepository(User::class);
+        $user = $repouser->find($iduser);
+        $reposkill = $this->getDoctrine()->getRepository(skill::class);
+        $skills = $reposkill->findAll();
+
+        if( !empty($_POST)){
+
+            foreach ($skills as $skill){
+                $grades = new Grade();
+
+                $formgrade = filter_var($_POST["grade".$skill->getId()],FILTER_SANITIZE_NUMBER_INT);
+
+                $grades->setSkill($skill);
+                $grades->setUser($user);
+                $grades->setGrades($formgrade);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($grades);
+                $em->flush();
+
+
+            }
+        }
+
+
+
+
+        return $this->render("admin\creategradetouser.html.twig",['users'=>$user,'skills'=>$skills]);
 
     }
-        return $this->render("admin\creategrade.html.twig", ["users"=>$users,"skill" => $skill]);
-    }
+
+
+
 
     /**
      * @Route("/admin/choicegrade",name="choice_grade")
@@ -93,7 +129,7 @@ class gradesController extends AbstractController
 
 
 
-            return $this->redirectToRoute("create_grade",['idskill'=>$formskill->getId(), 'class'=>"$formclass"]);
+            return $this->redirectToRoute("create_grade_class",['idskill'=>$formskill->getId(), 'class'=>"$formclass"]);
 
         }
 
