@@ -1,8 +1,14 @@
 {#page for administrator panel#}
 {% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("css/style.css") }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+{% endblock %}
+
+
 {% block body %}
-
-
 
 
        <h1> Notes de l'élèves : {{ nom }} {{ prenom }}</h1>
@@ -15,13 +21,53 @@
 
     <input type="button" id="lll">
 
-    <div id="demo"></div>
+    <canvas id="myChart"></canvas>
 
 
     <script type="text/javascript">
+        var lab = [];
+        var elt = {{ objgrade |raw }};
+            console.log(elt);
+            var test = JSON.stringify(elt);
+            alert(test);
 
-        var elt= {{objgrade|raw}};
-        console.log(elt);
+
+            console.log(test);
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+
+            for(let i =0;i<i;i++){
+                lab += elt[i].label;
+
+            }
+
+        console.log('lab: '+lab);
+
+
+
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'radar',
+
+                // The data for our dataset
+
+                data: {
+                    labels: ['francais','anglais','pinard'],
+                    datasets: [{
+                        label: 'note',
+                        backgroundColor: 'rgb(153,255,255)',
+                        borderColor: 'rgb(153,255,255)',
+                        data: [12,4,19]
+                    }]
+                },
+
+                // Configuration options go here
+                options: {}
+
+            });
+
+
 
 
 
