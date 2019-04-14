@@ -11,6 +11,7 @@
 {% block body %}
 
 
+    {% if   app.user.usercode  == usercode %}
        <h1> Notes de l'élèves : {{ nom }} {{ prenom }}</h1>
 
        {% for key, grade in grades %}
@@ -24,12 +25,17 @@
     <div id="pppp"><canvas id="myChart" ></canvas></div>
 
 
+
     <div id="comment-main-box">
+
         <div id="comment-title">Correspondance Professeur/Parent</div>
-        <h5> le poster le 02/02/02 08:02:02 par les parents de sophie</h5>
-        <div>bonjours, Sophie ne viendras en cours, ar il estait malade</div>
-        <h5> le poster le 02/02/02 10:02:04 par le professeur</h5>
-        <div>bonjours, merci  de m'avoir prevenus</div>
+        {% if app.user.id == userid %}
+        {% for receiver in receivers  %}
+            <h5>posté le date par   {{ receiver.sender.lastname }} {{ receiver.sender.firstname }}</h5>
+            {{ receiver.comment }}
+        {% endfor %}
+
+        {% endif %}
     </div>
 
 
@@ -108,5 +114,8 @@
 
 
     </script>
+    {% else %}
+    <h1>vous n'avez pas acces a cette utilisateur</h1>
+    {% endif %}
 {% endblock %}
 

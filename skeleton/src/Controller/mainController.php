@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comments;
 use App\Entity\Skill;
 use App\Entity\User;
 use App\Entity\Grade;
@@ -62,9 +63,13 @@ class mainController extends securityController
         $reposkill = $this->getDoctrine()->getRepository(Skill::class);
         $skills = $reposkill->findAll();
         $repograde = $this->getDoctrine()->getRepository(Grade::class);
-
+        $repocomment = $this->getDoctrine()->getRepository(Comments::class);
+        $receiver = $repocomment->findBy(['receiver'=>$user->getId() ]);
+        $sender = $repocomment->findBy(['sender'=>$user->getId() ]);
         $lastname = $user->getLastname();
         $firstname = $user->getFirstname();
+        $usercode  = $user->getUsercode();
+        $userid = $user->getId();
         $grades = $repograde->findBy(["user" => $user->getId(), "skill" => $skills]);
 
 
@@ -77,7 +82,17 @@ class mainController extends securityController
 
         $objgrade = json_encode($pp);
 
-        return $this->render('user.html.twig', ['nom' => $lastname, "prenom" => $firstname, "skills" => $skills, 'grades' => $grades, "objgrade" => $objgrade]);
+        return $this->render('user.html.twig',
+            [
+                'usercode'=>$usercode,
+                'nom' => $lastname,
+                "prenom" => $firstname,
+                "skills" => $skills,
+                'grades' => $grades,
+                "objgrade" => $objgrade,
+                "receivers"=>$receiver,
+                "senders"=>$sender,
+                "userid"=>$userid]);
 
 
     }

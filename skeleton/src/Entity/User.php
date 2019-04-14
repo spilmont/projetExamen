@@ -54,11 +54,23 @@ class User implements UserInterface, \Serializable
      */
     private $class;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comments", mappedBy="receiver")
+     */
+    private $receiver;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comments", mappedBy="sender")
+     */
+    private $sender;
+
 
 
     public function __construct()
     {
         $this->grades = new ArrayCollection();
+        $this->receiver = new ArrayCollection();
+        $this->sender = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -254,6 +266,68 @@ class User implements UserInterface, \Serializable
     public function setClass(?string $class): self
     {
         $this->class = $class;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getReceiver(): Collection
+    {
+        return $this->receiver;
+    }
+
+    public function addReceiver(Comments $receiver): self
+    {
+        if (!$this->receiver->contains($receiver)) {
+            $this->receiver[] = $receiver;
+            $receiver->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceiver(Comments $receiver): self
+    {
+        if ($this->receiver->contains($receiver)) {
+            $this->receiver->removeElement($receiver);
+            // set the owning side to null (unless already changed)
+            if ($receiver->getReceiver() === $this) {
+                $receiver->setReceiver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getSender(): Collection
+    {
+        return $this->sender;
+    }
+
+    public function addSender(Comments $sender): self
+    {
+        if (!$this->sender->contains($sender)) {
+            $this->sender[] = $sender;
+            $sender->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSender(Comments $sender): self
+    {
+        if ($this->sender->contains($sender)) {
+            $this->sender->removeElement($sender);
+            // set the owning side to null (unless already changed)
+            if ($sender->getSender() === $this) {
+                $sender->setSender(null);
+            }
+        }
 
         return $this;
     }
