@@ -12,6 +12,8 @@ use App\Entity\Comments;
 use App\Entity\Skill;
 use App\Entity\User;
 use App\Entity\Grade;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,7 +74,10 @@ class mainController extends securityController
         $userid = $user->getId();
         $grades = $repograde->findBy(["user" => $user->getId(), "skill" => $skills]);
 
-        dump($sender);
+        $form = $this->createFormBuilder()
+            ->add('comments',TextareaType::class)
+            ->add('save',SubmitType::class)
+            ->getForm();
 
         $pp = [];
         foreach ($grades as $grade) {
@@ -93,6 +98,7 @@ class mainController extends securityController
                 "objgrade" => $objgrade,
                 "receivers"=>$receiver,
                 "senders"=>$sender,
+                "formCom"=>$form->createView(),
                 "userid"=>$userid]);
 
 
