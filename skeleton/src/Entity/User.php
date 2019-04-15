@@ -64,6 +64,11 @@ class User implements UserInterface, \Serializable
      */
     private $sender;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $idProf;
+
 
 
     public function __construct()
@@ -328,6 +333,18 @@ class User implements UserInterface, \Serializable
                 $sender->setSender(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdProf(): ?int
+    {
+        return $this->idProf;
+    }
+
+    public function setIdProf(?int $idProf): self
+    {
+        $this->idProf = $idProf;
 
         return $this;
     }
