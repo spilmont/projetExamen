@@ -31,6 +31,16 @@ class Comments
      */
     private $Comment;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $date;
+
+    public function __construct()
+    {
+        $this->date = date('d/m/Y à H:i:s',time());
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +78,18 @@ class Comments
     public function setComment(string $Comment): self
     {
         $this->Comment = $Comment;
+
+        return $this;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(string $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

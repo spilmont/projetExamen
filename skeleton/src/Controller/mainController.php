@@ -64,7 +64,7 @@ class mainController extends securityController
         $skills = $reposkill->findAll();
         $repograde = $this->getDoctrine()->getRepository(Grade::class);
         $repocomment = $this->getDoctrine()->getRepository(Comments::class);
-        $receiver = $repocomment->findBy(['receiver'=>$user->getId() ]);
+        $receiver = $repocomment->findAll();
         $sender = $repocomment->findBy(['sender'=>$user->getId() ]);
         $lastname = $user->getLastname();
         $firstname = $user->getFirstname();
@@ -72,6 +72,7 @@ class mainController extends securityController
         $userid = $user->getId();
         $grades = $repograde->findBy(["user" => $user->getId(), "skill" => $skills]);
 
+        dump($sender);
 
         $pp = [];
         foreach ($grades as $grade) {

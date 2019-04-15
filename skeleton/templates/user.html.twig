@@ -29,13 +29,16 @@
     <div id="comment-main-box">
 
         <div id="comment-title">Correspondance Professeur/Parent</div>
-        {% if app.user.id == userid %}
+
         {% for receiver in receivers  %}
-            <h5>posté le date par   {{ receiver.sender.lastname }} {{ receiver.sender.firstname }}</h5>
+            {% if app.user.id == receiver.receiver.id or app.user.id == receiver.sender.id %}
+            <h5>posté le {{ receiver.date }} par   {{ receiver.sender.lastname }} {{ receiver.sender.firstname }}</h5>
             {{ receiver.comment }}
+
+            {% endif %}
         {% endfor %}
 
-        {% endif %}
+
     </div>
 
 
