@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+{{ form(formCom) }}
+<div id="comment-main-box">
+
+    <div id="comment-title">Correspondance Professeur/Parent</div>
+
+    {% for comment in comments  %}
+        {{ app.user.id }}====>{{ comment.receiver.id }}
+        {% if app.user.id == comment.receiver.id or sender  == comment.sender.id %}
+            <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} le professeur {% else %}les parents de  {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
+            {{ comment.comment }}
+
+        {% endif %}
+    {% endfor %}
+
+
+</div>
+{% endblock %}

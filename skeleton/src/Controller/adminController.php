@@ -10,10 +10,12 @@
 namespace App\Controller;
 
 
+use App\Entity\Comments;
 use App\Repository\UserRepository;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -199,6 +201,36 @@ class adminController extends AbstractController
             'lastname' => $lastname,
             'class'=> $class
         ]);
+
+    }
+
+    /**
+     * @Route("/admin/message/{idstudient}")
+     */
+    public function  comment(Request $request,$idstudient){
+
+        $com = new Comments();
+
+
+
+        $repocomments= $this->getDoctrine()->getRepository(Comments::class);
+        $comments = $repocomments->findall();
+
+        dump($comments);
+
+        $form = $this->createFormBuilder($com)
+            ->add('comment',TextareaType::class)
+            ->add('save',SubmitType::class)
+            ->getForm();
+
+
+
+
+
+
+        return $this->render("admin/comments.html.twig",['sender'=>$idstudient,'comments'=>$comments,'formCom'=>$form->createView()]);
+
+
 
     }
 }
