@@ -43,6 +43,9 @@ class mainController extends securityController
         if (true === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin');
         }
+        if (true === $this->get('security.authorization_checker')->isGranted('ROLE_SUPERADMIN')) {
+            return $this->redirectToRoute('admin');
+        }
         if (true === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('user', ['lastname' => $this->getUser()->getLastname(), 'firstname' => $this->getUser()->getFirstname()]);
         } else {

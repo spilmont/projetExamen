@@ -15,6 +15,7 @@ use App\Repository\UserRepository;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,22 +45,36 @@ class adminController extends AbstractController
         $user = new User();
 
         // create formbuilder for enter information of studient
+        if($this->isGranted('ROLE_SUPERADMIN')){
+            $form = $this->createFormBuilder($user)
+                ->add('lastname', TextType::class, ['label' => 'nom : '])
+                ->add('firstname', TextType::class, ['label' => 'prénom : '])
+                ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
+                ->add('usercode', TextType::class, ['label' => 'code élève : '])
+                ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
+                ->add('idrank', IntegerType::class, ['attr' => ['min' => 1, 'max' => 3]])
+                ->add('idProf',IntegerType::class,['label'=>'id du professeur'])
+                ->add('save', SubmitType::class)
+                ->getForm();
+        }else{
         $form = $this->createFormBuilder($user)
             ->add('lastname', TextType::class, ['label' => 'nom : '])
             ->add('firstname', TextType::class, ['label' => 'prénom : '])
             ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
             ->add('usercode', TextType::class, ['label' => 'code élève : '])
-            ->add('idrank', IntegerType::class, ['attr' => ['min' => 1, 'max' => 3]])
-            ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"
-                ,'ProfCP'=>'ProfCP','ProfCE1'=>'ProfCE1','ProfCE2'=>'ProfCE2','ProfCM1'=>'ProfCM1','ProfCM2'=>'ProfCM2']])
             ->add('save', SubmitType::class)
             ->getForm();
-
+    }
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            if($this->isGranted('ROLE_ADMIN')) {
+                $user->setClass($this->getUser()->getclass());
+                $user->setIdProf($this->getUser()->getid());
+                $user->setIdrank("3");
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -84,7 +99,12 @@ class adminController extends AbstractController
         // return the administrator panel
 
         $repository = $this->getDoctrine()->getRepository(User::class);
-        $user = $repository->findAll();
+        if($this->isGranted('ROLE_ADMIN')){
+        $user = $repository->findby(['idProf'=>$this->getUser()->getid()]);
+        }
+        elseif($this->isGranted('ROLE_SUPERADMIN')){
+            $user = $repository->findAll();
+        }
         return $this->render("admin/admin.html.twig", ["user" => $user]);
 
 
@@ -105,6 +125,7 @@ class adminController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         // entity manager use repository of user class and search user by id
+
         $user = $em->getRepository(User::class)->find($id);
 
         // remove  user
@@ -133,21 +154,36 @@ class adminController extends AbstractController
         $user = $em->getRepository(User::class)->find($id);
 
 
-        $form = $this->createFormBuilder($user)
-            ->add('lastname', TextType::class, ['label' => 'nom : '])
-            ->add('firstname', TextType::class, ['label' => 'prénom : '])
-            ->add('password', TextType::class, ['label' => 'mot de passe : '])
-            ->add('usercode', TextType::class, ['label' => 'code élève : '])
-            ->add('idrank', IntegerType::class)
-            ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"
-                                                        ,'ProfCP'=>'ProfCP','ProfCE1'=>'ProfCE1','ProfCE2'=>'ProfCE2','ProfCM1'=>'ProfCM1','ProfCM2'=>'ProfCM2']])
-            ->add('save', SubmitType::class)
-            ->getForm();
-
+        if($this->isGranted('ROLE_SUPERADMIN')){
+            $form = $this->createFormBuilder($user)
+                ->add('lastname', TextType::class, ['label' => 'nom : '])
+                ->add('firstname', TextType::class, ['label' => 'prénom : '])
+                ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
+                ->add('usercode', TextType::class, ['label' => 'code élève : '])
+                ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
+                ->add('idrank', IntegerType::class, ['attr' => ['min' => 1, 'max' => 3]])
+                ->add('idProf',IntegerType::class,['label'=>'id du professeur'])
+                ->add('save', SubmitType::class)
+                ->getForm();
+        }else{
+            $form = $this->createFormBuilder($user)
+                ->add('lastname', TextType::class, ['label' => 'nom : '])
+                ->add('firstname', TextType::class, ['label' => 'prénom : '])
+                ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
+                ->add('usercode', TextType::class, ['label' => 'code élève : '])
+                ->add('save', SubmitType::class)
+                ->getForm();
+        }
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if($this->isGranted('ROLE_ADMIN')) {
+                $user->setClass($this->getUser()->getclass());
+                $user->setIdProf($this->getUser()->getid());
+                $user->setIdrank("3");
+            }
 
             //save ans send action on bdd
             $em = $this->getDoctrine()->getManager();
@@ -175,16 +211,26 @@ class adminController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository(User::class)->findAll();
+        if($this->isGranted('ROLE_ADMIN')){
+            $user = $em->getRepository(User::class)->findBy(['idProf'=>$this->getUser()->getid()]);
+        }
+        elseif($this->isGranted('ROLE_SUPERADMIN')) {
+            $user = $em->getRepository(User::class)->findAll();
+        }
 
-        $form = $this->createFormBuilder($user)
-            ->add('lastname', TextType::class, ['label' => 'nom','required'=>false])
-
-            ->add('class', ChoiceType::class, ['label' => 'classe','required'=>false,
-                'choices'=>["tous"=>"","CP"=>"CP",'CE1'=>'CE1','CE2'=>'CE2','CM1'=>'CM1','CM2'=>'CM2']])
-            ->add('save', SubmitType::class, ['label'=>'filtrer'])
-            ->getForm();
-
+        if($this->isGranted('ROLE_SUPERADMIN')) {
+            $form = $this->createFormBuilder($user)
+                ->add('lastname', TextType::class, ['label' => 'nom', 'required' => false])
+                ->add('class', ChoiceType::class, ['label' => 'classe', 'required' => false,
+                    'choices' => ["tous" => "", "CP" => "CP", 'CE1' => 'CE1', 'CE2' => 'CE2', 'CM1' => 'CM1', 'CM2' => 'CM2']])
+                ->add('save', SubmitType::class, ['label' => 'filtrer'])
+                ->getForm();
+        }else{
+            $form = $this->createFormBuilder($user)
+                ->add('lastname', TextType::class, ['label' => 'nom', 'required' => false])
+                ->add('save', SubmitType::class, ['label' => 'filtrer'])
+                ->getForm();
+        }
 
 
 
@@ -205,24 +251,43 @@ class adminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/message/{idstudient}")
+     * @Route("/admin/message/{idstudient}",name="message")
      */
-    public function  comment(Request $request,$idstudient){
-
+    public function  comment(Request $request,$idstudient ){
         $com = new Comments();
 
 
+        $repouser = $this->getDoctrine()->getRepository(User::class);
+        $sender = $repouser->find($idstudient);
 
+        dump($sender);
         $repocomments= $this->getDoctrine()->getRepository(Comments::class);
-        $comments = $repocomments->findall();
+        $comments = $repocomments->findby([],['id'=>'DESC']);
 
-        dump($comments);
+
 
         $form = $this->createFormBuilder($com)
             ->add('comment',TextareaType::class)
             ->add('save',SubmitType::class)
             ->getForm();
 
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+
+            $com->setReceiver($sender);
+
+            $com->setSender($this->getUser());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($com);
+            $em->flush();
+
+            return  $this->redirectToRoute('message',['idstudient'=>$idstudient]);
+
+
+        }
 
 
 

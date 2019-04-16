@@ -149,6 +149,8 @@ class User implements UserInterface, \Serializable
             return ['ROLE_ADMIN'];
         elseif ($this->idrank == 3)
             return ['ROLE_USER'];
+        elseif ($this->idrank == 2)
+            return ['ROLE_SUPERADMIN'];
         else
             return [];
     }
