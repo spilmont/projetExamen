@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Grade|null find($id, $lockMode = null, $lockVersion = null)
  * @method Grade|null findOneBy(array $criteria, array $orderBy = null)
  * @method Grade[]    findAll()
- * @method Grade[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Grade[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null, $distinct = true)
  */
 class GradeRepository extends ServiceEntityRepository
 {
@@ -35,6 +35,7 @@ class GradeRepository extends ServiceEntityRepository
         ;
     }
     */
+
 
     /*
     public function findOneBySomeField($value): ?Grade

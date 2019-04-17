@@ -260,7 +260,7 @@ class adminController extends AbstractController
         $repouser = $this->getDoctrine()->getRepository(User::class);
         $sender = $repouser->find($idstudient);
 
-        dump($sender);
+
         $repocomments= $this->getDoctrine()->getRepository(Comments::class);
         $comments = $repocomments->findby([],['id'=>'DESC']);
 

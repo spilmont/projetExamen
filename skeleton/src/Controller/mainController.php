@@ -103,10 +103,26 @@ class mainController extends securityController
 
         }
 
+
+
+
+        $collectiongrades= [];
         $pp = [];
         foreach ($grades as $grade) {
 
-            $pp[] = ["skill" => $grade->getskill()->getskill(), "grade" => $grade->getgrades()];
+          if($grade->getskill() =="mathematiques" )
+          {
+
+              $collectiongrades[] += $grade->getgrades();
+
+
+              dump( array_sum($collectiongrades)/count($collectiongrades));
+          }
+
+
+
+
+           $pp[] = ["skill" => $grade->getskill()->getskill(), "grade" => $grade->getgrades()];
 
         }
 
