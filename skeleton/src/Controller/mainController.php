@@ -12,6 +12,7 @@ use App\Entity\Comments;
 use App\Entity\Skill;
 use App\Entity\User;
 use App\Entity\Grade;
+use Doctrine\ORM\Query\Expr\Select;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -78,6 +79,18 @@ class mainController extends securityController
         $usercode  = $user->getUsercode();
         $userid = $user->getId();
         $grades = $repograde->findBy(["user" => $user->getId(), "skill" => $skills]);
+        dump($grades);
+        $em = $this->getDoctrine()->getManager(); //on appelle Doctrine
+        $query= $em->createQueryBuilder()->select("s.skill","avg(g.grades)")->from(Grade::class,'g')->join("g.skill","s")->where("g.user = :studient")->groupby('g.skill')->setparameter('studient',$this->getUser()->getid())->getquery();
+        $gradus = $query->getResult();
+
+        dump($gradus);
+        dump($query);
+
+
+
+
+
 
         $form = $this->createFormBuilder($com)
             ->add('comment',TextareaType::class)
@@ -108,25 +121,16 @@ class mainController extends securityController
 
         $collectiongrades= [];
         $pp = [];
-        foreach ($grades as $grade) {
-
-          if($grade->getskill() =="mathematiques" )
-          {
-
-              $collectiongrades[] += $grade->getgrades();
-
-
-              dump( array_sum($collectiongrades)/count($collectiongrades));
-          }
+        foreach ($gradus as $grade) {
 
 
 
 
-           $pp[] = ["skill" => $grade->getskill()->getskill(), "grade" => $grade->getgrades()];
+          // $pp[] = ["skill" => $grade->getskill()->getskill(), "grade" => $grade->getgrades()];
 
         }
 
-        $objgrade = json_encode($pp);
+        $objgrade = json_encode($gradus);
 
         return $this->render('user.html.twig',
             [

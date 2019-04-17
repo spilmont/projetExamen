@@ -47,6 +47,7 @@
         var skills = [];
         var grades = [];
         var elt = {{ objgrade |  raw  }}
+        console.log(elt);
 
 
 
@@ -56,12 +57,13 @@
          var skill = elt[i].skill;
          skills.push(skill);
 
-         var grade = elt[i].grade;
+         var grade = elt[i][1];
          grades.push(grade)
 
         }
 
  console.log(skills);
+        console.log(grades);
 
 
 
