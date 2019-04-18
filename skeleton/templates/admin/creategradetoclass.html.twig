@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
     <h1> enregistrement des notes de {{ skill }} de la classe de {{ users[0].class }}</h1>
 
     <form method="post" action="">

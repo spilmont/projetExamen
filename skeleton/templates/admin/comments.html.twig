@@ -2,15 +2,17 @@
 
 
 {% block body %}
+    <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
 {{ form(formCom) }}
 <div id="comment-main-box">
+
 
     <div id="comment-title">Correspondance Professeur/Parent</div>
 
     {% for comment in comments  %}
 
-        {% if app.user.id == comment.receiver.id and sender == comment.sender.id or app.user.id == comment.sender.id   %}
-            <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} le professeur {% else %}les parents de  {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
+        {% if app.user.id == comment.sender.id and comment.receiver.id == sender or app.user.id == comment.receiver.id and comment.sender.id == sender  %}
+            <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} le professeur{% elseif comment.sender.idrank ==2 %} Le directeur {% else %}les parents de  {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
             {{ comment.comment }}
 
         {% endif %}

@@ -23,8 +23,8 @@
         <th>code utilisateur</th>
         <th>id_rank</th>
         <th>class</th>
-        <th>note</th>
         <th>messagerie</th>
+        <th>note</th>
     </tr>
     {%if lastname is empty and class is empty %}
     {% for i in user  %}
@@ -38,8 +38,8 @@
                 <td>{{ i.usercode }}</td>
                 <td>{{ i.idrank }}</td>
                 <td>{{ i.class }}</td>
-                <td><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
-                    {% if i.idrank == 3 %}
+        <td><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
+                    {% if i.idrank == 3  and i.class == app.user.class %}
                     <td><a href="{{ path('create_grade_user',{'iduser': i.id}) }}">noter</a></td>
                     {% endif %}
 

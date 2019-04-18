@@ -41,8 +41,8 @@
         <div id="comment-title">Correspondance Professeur/Parent</div>
 
         {% for comment in comments  %}
-            {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id %}
-            <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} les parents de {% else %} le professeur {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
+            {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id or comment.sender.idrank == 2 and comment.receiver.id == app.user.id%}
+            <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} les parents de{% elseif comment.sender.idrank == 2  %} Le directeur  {% else %} le professeur {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
             {{ comment.comment }}
 
             {% endif %}

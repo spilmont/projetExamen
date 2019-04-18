@@ -115,7 +115,9 @@ class gradesController extends AbstractController
                 'choice_label' => 'skill',
 
             ])
+
             ->add('save',SubmitType::class)
+
             ->getForm();
 
 
@@ -124,13 +126,13 @@ class gradesController extends AbstractController
 
         if($form->isSubmitted()&& $form->isValid()){
 
-            $user->setClass($this->getUser()->getClass());
+
             $formskill = $form->get('skill')->getData();
-            $formclass = $form->get('class')->getData();
 
 
 
-            return $this->redirectToRoute("create_grade_class",['idskill'=>$formskill->getId(), 'class'=>"$formclass"]);
+
+            return $this->redirectToRoute("create_grade_class",['idskill'=>$formskill->getId(), 'class'=>$this->getUser()->getClass()]);
 
         }
 
