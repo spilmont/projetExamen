@@ -37,10 +37,19 @@ input{
 }
 
 #pppp{
+    display: inline-block;
     width: 600px;
     height: 300px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.formulaire{
+    width: 13%;
+    line-height: 200%;
+    text-align: center;
+    margin: auto;
+
 }
 
 #comment-main-box{
@@ -58,3 +67,24 @@ input{
 h5{
     text-align: center;
 }
+
+#averagegrade{
+
+    display: inline-block;
+    text-align: center;
+    border: black solid;
+
+
+}
+.avg{
+    border: black solid;
+}
+
+legend{
+    line-height: 100%;
+}
+table{
+    margin: auto;
+    text-align: center;
+}
+

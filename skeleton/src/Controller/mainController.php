@@ -79,17 +79,9 @@ class mainController extends securityController
         $usercode  = $user->getUsercode();
         $userid = $user->getId();
         $grades = $repograde->findBy(["user" => $user->getId(), "skill" => $skills]);
-        dump($grades);
-        $em = $this->getDoctrine()->getManager(); //on appelle Doctrine
+        $em = $this->getDoctrine()->getManager();
         $query= $em->createQueryBuilder()->select("s.skill","avg(g.grades)")->from(Grade::class,'g')->join("g.skill","s")->where("g.user = :studient")->groupby('g.skill')->setparameter('studient',$this->getUser()->getid())->getquery();
         $gradus = $query->getResult();
-
-        dump($gradus);
-        dump($query);
-
-
-
-
 
 
         $form = $this->createFormBuilder($com)
@@ -113,27 +105,13 @@ class mainController extends securityController
             return  $this->redirectToRoute('user',[ 'lastname' => $lastname,
                 "firstname" => $firstname,]);
 
-
-        }
-
-
-
-
-        $collectiongrades= [];
-        $pp = [];
-        foreach ($gradus as $grade) {
-
-
-
-
-          // $pp[] = ["skill" => $grade->getskill()->getskill(), "grade" => $grade->getgrades()];
-
-        }
+     }
 
         $objgrade = json_encode($gradus);
 
         return $this->render('user.html.twig',
             [
+                'gradus'=>$gradus,
                 'usercode'=>$usercode,
                 'nom' => $lastname,
                 "prenom" => $firstname,

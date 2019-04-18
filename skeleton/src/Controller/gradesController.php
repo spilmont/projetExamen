@@ -108,8 +108,8 @@ class gradesController extends AbstractController
         $repouser = $this->getDoctrine()->getRepository(User::class);
         $user = $repouser->findAll();
 
+
         $form = $this->createFormBuilder($user)
-            ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
             ->add('skill',EntityType::class,[
                 "class"=>Skill::class,
                 'choice_label' => 'skill',
@@ -124,6 +124,7 @@ class gradesController extends AbstractController
 
         if($form->isSubmitted()&& $form->isValid()){
 
+            $user->setClass($this->getUser()->getClass());
             $formskill = $form->get('skill')->getData();
             $formclass = $form->get('class')->getData();
 

@@ -51,8 +51,8 @@ class adminController extends AbstractController
                 ->add('firstname', TextType::class, ['label' => 'prénom : '])
                 ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
                 ->add('usercode', TextType::class, ['label' => 'code élève : '])
-                ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
-                ->add('idrank', IntegerType::class, ['attr' => ['min' => 1, 'max' => 3]])
+                ->add('class',ChoiceType::class,["label"=>false,"choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
+                ->add('idrank', ChoiceType::class, ["label"=>false,"choices"=>["Professeur"=>1,"Directeur"=>2,"éleve"=>3]])
                 ->add('idProf',IntegerType::class,['label'=>'id du professeur'])
                 ->add('save', SubmitType::class)
                 ->getForm();
