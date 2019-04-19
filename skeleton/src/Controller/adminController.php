@@ -25,6 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 use App\Entity\User;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 // controller for CRUD For  administrator panel
 
@@ -37,7 +38,7 @@ class adminController extends AbstractController
     /**
      * @Route("/admin/createuserbyadmin", name="user_by_admin")
      */
-    public function create(Request $request)
+    public function create(Request $request,UserPasswordEncoderInterface $passwordEncoder)
     {
         //create a new studient with the form
 
@@ -49,7 +50,7 @@ class adminController extends AbstractController
             $form = $this->createFormBuilder($user)
                 ->add('lastname', TextType::class, ['label' => 'nom : '])
                 ->add('firstname', TextType::class, ['label' => 'prénom : '])
-                ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
+                ->add('plainPassword', PasswordType::class, ['label' => 'mot de passe : '])
                 ->add('usercode', TextType::class, ['label' => 'code élève : '])
                 ->add('class',ChoiceType::class,["label"=>false,"choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
                 ->add('idrank', ChoiceType::class, ["label"=>false,"choices"=>["Professeur"=>1,"Directeur"=>2,"éleve"=>3]])
@@ -60,7 +61,7 @@ class adminController extends AbstractController
         $form = $this->createFormBuilder($user)
             ->add('lastname', TextType::class, ['label' => 'nom : '])
             ->add('firstname', TextType::class, ['label' => 'prénom : '])
-            ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
+            ->add('plainPassword', PasswordType::class, ['label' => 'mot de passe : '])
             ->add('usercode', TextType::class, ['label' => 'code élève : '])
             ->add('save', SubmitType::class)
             ->getForm();
@@ -69,6 +70,12 @@ class adminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+           $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+
+
 
             if($this->isGranted('ROLE_ADMIN')) {
                 $user->setClass($this->getUser()->getclass());
@@ -142,7 +149,7 @@ class adminController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("admin/update/{id}",name="update_user")
      * */
-    public function update(Request $request, $id)
+    public function update(Request $request,UserPasswordEncoderInterface $passwordEncoder, $id)
     {
         // for update user by admin
 
@@ -158,7 +165,7 @@ class adminController extends AbstractController
             $form = $this->createFormBuilder($user)
                 ->add('lastname', TextType::class, ['label' => 'nom : '])
                 ->add('firstname', TextType::class, ['label' => 'prénom : '])
-                ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
+                ->add('plainPassword', PasswordType::class, ['label' => 'mot de passe : '])
                 ->add('usercode', TextType::class, ['label' => 'code élève : '])
                 ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
                 ->add('idrank', IntegerType::class, ['attr' => ['min' => 1, 'max' => 3]])
@@ -169,7 +176,7 @@ class adminController extends AbstractController
             $form = $this->createFormBuilder($user)
                 ->add('lastname', TextType::class, ['label' => 'nom : '])
                 ->add('firstname', TextType::class, ['label' => 'prénom : '])
-                ->add('password', PasswordType::class, ['label' => 'mot de passe : '])
+                ->add('PlainPassword', PasswordType::class, ['label' => 'mot de passe : '])
                 ->add('usercode', TextType::class, ['label' => 'code élève : '])
                 ->add('save', SubmitType::class)
                 ->getForm();
@@ -178,6 +185,9 @@ class adminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
 
             if($this->isGranted('ROLE_ADMIN')) {
                 $user->setClass($this->getUser()->getclass());
