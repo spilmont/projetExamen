@@ -22,8 +22,8 @@
        {% for key, grade in gradus %}
 
            <tr>
-               <td>{{ grade.skill }}</td>
-              <td>{{ grade[1] }}</td>
+               <td ><a class="skill" href="{{ path("total_grades",{"lastname":nom ,'firstname':prenom,'selectskill': grade.skill}) }}" >{{ grade.skill }}</a></td>
+              <td>{{ grade[1] | round(1,'floor')}}</td>
            </tr>
 
 
@@ -50,9 +50,82 @@
 
 
     </div>
+        <script  src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
     <script type="text/javascript">
+        function onclickdivskill(event){
+            event.preventDefault();
+
+            axios.get('/user/totalgrades/'+this.innerHTML+'/{{ nom }}/{{ prenom }}')
+                .then(function (response) {
+                    // handle success
+
+                    console.log(response);
+
+
+                    var skills = [];
+                    var grades = [];
+
+
+                    skills = response.data.skills;
+                    grades = response.data.grades;
+
+
+
+                    var ctx = document.getElementById('myChart').getContext('2d');
+
+                    var myLineChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: skills,
+                            datasets: [{
+                                data: grades,
+                                label: skills[0],
+                                borderColor: "#3e95cd",
+                                fill: false,
+
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true,
+                                        max: 20
+                                    }
+                                }],
+                                xAxes: [{
+                                    display: false
+
+
+
+                                }]
+                            }
+                        }
+
+
+                    });
+
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                });
+        }
+
+        document.querySelectorAll('a.skill').forEach(function (a) {
+
+
+
+
+            a.addEventListener("click",onclickdivskill)
+
+
+        });
+
+
+
         var skills = [];
         var grades = [];
         var elt = {{ objgrade |  raw  }}
@@ -66,7 +139,7 @@
          var skill = elt[i].skill;
          skills.push(skill);
 
-         var grade = elt[i][1];
+         var grade = (elt[i][1]);
          grades.push(grade)
 
         }
@@ -134,3 +207,6 @@
     {% endif %}
 {% endblock %}
 
+{% block javascripts %}
+
+{% endblock %}

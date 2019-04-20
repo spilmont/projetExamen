@@ -125,5 +125,43 @@ class mainController extends securityController
 
     }
 
+    /**
+     * @Route("/user/totalgrades/{selectskill}/{lastname}/{firstname}",name="total_grades")
+     */
+    public function totalgrade(User $user, $selectskill ){
+
+
+
+        $reposkill = $this->getDoctrine()->getRepository(Skill::class);
+        $repograde = $this->getDoctrine()->getRepository(Grade::class);
+        $skills = $reposkill->findOneBy(["skill"=>$selectskill]);
+        $grades = $repograde->findBy([ "skill" => $skills,"user"=>$user]);
+
+
+        $lastname = $user->getLastname();
+        $firstname = $user->getFirstname();
+
+
+        $gradeskills = [];
+        $totalgrades = [];
+        foreach ($grades as $grade){
+
+            $gradeskills []=$grade->getskill()->getskill();
+            $totalgrades []=$grade->getgrades();
+
+        }
+
+
+
+
+
+
+
+        return $this->json(["skills"=>$gradeskills,"grades"=>$totalgrades],200);
+
+
+    }
+
+
 
 }
