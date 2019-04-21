@@ -40,9 +40,10 @@ input{
     display: inline-block;
     width: 600px;
     height: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+
 }
+
 
 .formulaire{
     width: 13%;
@@ -73,6 +74,9 @@ h5{
     display: inline-block;
     text-align: center;
     border: black solid;
+    margin-left: 10%;
+    margin-right: 15%;
+    margin-bottom:3%;
 
 
 }
