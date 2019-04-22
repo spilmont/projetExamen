@@ -1,6 +1,5 @@
 h1{
     text-align: center;
-
 }
 
 header{
@@ -9,7 +8,6 @@ header{
     border-bottom-left-radius:  20px;
     height: 120px;
     color: white;
-
 }
 
 input{
@@ -91,4 +89,14 @@ table{
     margin: auto;
     text-align: center;
 }
+
+@media (max-width: 1180px) {
+
+    .mdp{
+        display: none;
+    }
+
+}
+    
+
 
