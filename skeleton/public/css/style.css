@@ -90,11 +90,59 @@ table{
     text-align: center;
 }
 
+#hamburger-menu > a{
+    display: inline-block;
+    width: auto;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+#hamburger-menu >span {
+    display: none;
+    text-align: center;
+    line-height:  5px;
+    width: 80%;
+    border-radius: 20px;
+    padding:  10px;
+    background-color: cornflowerblue;
+}
+
+#navigation{
+    text-align: center;
+}
+
+
 @media (max-width: 1180px) {
 
     .mdp{
         display: none;
     }
+
+}
+@media (max-width: 600px) {
+
+    .hide{
+        display: none;
+    }
+
+
+    #hamburger-menu > a{
+        display: none;
+    }
+    #hamburger-menu > span{
+        display: inline-block;
+    }
+    #hamburger-menu:hover >a{
+        width: 80%;
+        display: block;
+        margin: 10px auto;
+    }
+    #hamburger-menu:hover > span
+    {
+        display: none;
+
+    }
+
 
 }
     

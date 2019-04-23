@@ -4,43 +4,46 @@
 {% block body %}
 <h1>Panneau administrateur</h1>
 
-
+<nav id="navigation">
+    <div id="hamburger-menu">
+        <span>|||</span>
     <a class="buttonnav"  href="{{ path('user_by_admin') }}">entrer un nouvel eleve</a>
     <a class="buttonnav"  href="{{ path('show_skill') }}">vers les compétences</a>
     <a class="buttonnav"  href="{{ path('choice_grade') }}"> enregistrement des notes par classe</a>
-
+    </div>
+</nav>
 
 
     <div id="filter">{{ form(filter) }}</div>
 <table>
     <tr>
-        <th></th>
-        <th></th>
+        <th class="hide"></th>
+        <th class="hide"></th>
         <th>id</th>
         <th>nom</th>
         <th>prenom</th>
-        <th class="mdp">mot de passe</th>
+        <th class="mdp hide">mot de passe</th>
         <th>code utilisateur</th>
         <th>id_rank</th>
         <th>class</th>
-        <th>messagerie</th>
-        <th>note</th>
+        <th class="hide">messagerie</th>
+        <th class="hide">note</th>
     </tr>
     {%if lastname is empty and class is empty %}
     {% for i in user  %}
     <tr>
-        <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
-        <td><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+        <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+        <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
                 <td>{{ i.id }}</td>
                 <td>{{ i.lastname }}</td>
                 <td>{{ i.firstname }}</td>
-                <td class="mdp">{{ i.password }}</td>
+                <td class="mdp hide">{{ i.password }}</td>
                 <td>{{ i.usercode }}</td>
                 <td>{{ i.idrank }}</td>
                 <td>{{ i.class }}</td>
-        <td><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
+        <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
                     {% if i.idrank == 3  and i.class == app.user.class %}
-                    <td><a href="{{ path('create_grade_user',{'iduser': i.id}) }}">noter</a></td>
+                    <td class="hide"><a href="{{ path('create_grade_user',{'iduser': i.id}) }}">noter</a></td>
                     {% endif %}
 
             </tr>
@@ -51,25 +54,23 @@
     {% if lastname is not empty  %}
         {% for i in user  if i.lastname == lastname %}
             <tr>
-                <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
-                <td><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+                <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
                 <td>{{ i.id }}</td>
                 <td>{{ i.lastname }}</td>
                 <td>{{ i.firstname }}</td>
-                <td>{{ i.password }}</td>
+                <td class="mdp hide">{{ i.password }}</td>
                 <td>{{ i.usercode }}</td>
                 <td>{{ i.idrank }}</td>
                 <td>{{ i.class }}</td>
             </tr>
-
-
         {% endfor %}
     {% endif %}
     {% if class is not empty  %}
         {% for i in user  if i.class == class %}
             <tr>
-                <td><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
-                <td><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+                <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
                 <td>{{ i.id }}</td>
                 <td>{{ i.lastname }}</td>
                 <td>{{ i.firstname }}</td>
