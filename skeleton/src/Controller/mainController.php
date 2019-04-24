@@ -151,12 +151,6 @@ class mainController extends securityController
 
         }
 
-
-
-
-
-
-
         return $this->json(["skills"=>$gradeskills,"grades"=>$totalgrades],200);
 
 

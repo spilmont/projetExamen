@@ -9,6 +9,10 @@ header{
     height: 120px;
     color: white;
 }
+#filter{
+    text-align: center;
+   margin-top:20px;
+}
 
 input{
     border-radius: 20px;
