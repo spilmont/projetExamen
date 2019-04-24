@@ -42,6 +42,7 @@ class adminController extends AbstractController
     {
         //create a new studient with the form
 
+
         // create new instance of user object
         $user = new User();
 
@@ -54,7 +55,6 @@ class adminController extends AbstractController
                 ->add('usercode', TextType::class, ['label' => 'code élève : '])
                 ->add('class',ChoiceType::class,["label"=>false,"choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
                 ->add('idrank', ChoiceType::class, ["label"=>false,"choices"=>["Professeur"=>1,"Directeur"=>2,"éleve"=>3]])
-                ->add('idProf',IntegerType::class,['label'=>'id du professeur'])
                 ->add('save', SubmitType::class)
                 ->getForm();
         }else{
@@ -65,7 +65,12 @@ class adminController extends AbstractController
             ->add('usercode', TextType::class, ['label' => 'code élève : '])
             ->add('save', SubmitType::class)
             ->getForm();
-    }
+    };
+
+
+
+
+
 
         $form->handleRequest($request);
 
@@ -76,6 +81,15 @@ class adminController extends AbstractController
 
 
 
+            if($this->isGranted('ROLE_SUPERADMIN')) {
+
+                if($form['class']->getData() == $this->getUser()->getclass())
+                    $idprof = $this->getUser();
+                else
+                    $idprof = $this->getDoctrine()->getRepository(User::class)->findOneBy(["idrank"=>1 , "class"=>$form['class']->getData()]);
+
+                $user->setIdProf($idprof->getId());
+            }
 
             if($this->isGranted('ROLE_ADMIN')) {
                 $user->setClass($this->getUser()->getclass());
@@ -169,7 +183,6 @@ class adminController extends AbstractController
                 ->add('usercode', TextType::class, ['label' => 'code élève : '])
                 ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
                 ->add('idrank', IntegerType::class, ['attr' => ['min' => 1, 'max' => 3]])
-                ->add('idProf',IntegerType::class,['label'=>'id du professeur'])
                 ->add('save', SubmitType::class)
                 ->getForm();
         }else{
@@ -188,6 +201,16 @@ class adminController extends AbstractController
 
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
+
+            if($this->isGranted('ROLE_SUPERADMIN')) {
+
+                if($form['class']->getData() == $this->getUser()->getclass())
+                    $idprof = $this->getUser();
+                else
+                    $idprof = $this->getDoctrine()->getRepository(User::class)->findOneBy(["idrank"=>1 , "class"=>$form['class']->getData()]);
+
+                $user->setIdProf($idprof->getId());
+            }
 
             if($this->isGranted('ROLE_ADMIN')) {
                 $user->setClass($this->getUser()->getclass());

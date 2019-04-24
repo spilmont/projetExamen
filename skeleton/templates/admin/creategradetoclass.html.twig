@@ -5,7 +5,7 @@
     <h1> enregistrement des notes de {{ skill }} de la classe de {{ users[0].class }}</h1>
 
     <form method="post" action="">
-        {% for user in users %}
+        {% for user in users if user.idrank ==3%}
 
             <label for="grade{{ user.id }}">{{ user.lastname }} {{ user.firstname}}</label>
             <input type="number" name="grade{{ user.id }}" id="grade{{ user.id }}" min="0" max="20"><br>

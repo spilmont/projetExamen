@@ -63,6 +63,12 @@
                 <td>{{ i.usercode }}</td>
                 <td>{{ i.idrank }}</td>
                 <td>{{ i.class }}</td>
+                <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
+                {% if i.idrank == 3  and i.class == app.user.class %}
+                    <td class="hide"><a href="{{ path('create_grade_user',{'iduser': i.id}) }}">noter</a></td>
+                {% endif %}
+
+
             </tr>
         {% endfor %}
     {% endif %}
@@ -78,6 +84,10 @@
                 <td>{{ i.usercode }}</td>
                 <td>{{ i.idrank }}</td>
                 <td>{{ i.class }}</td>
+                <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
+                {% if i.idrank == 3  and i.class == app.user.class %}
+                    <td class="hide"><a href="{{ path('create_grade_user',{'iduser': i.id}) }}">noter</a></td>
+                {% endif %}
             </tr>
 
 
