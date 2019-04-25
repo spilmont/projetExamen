@@ -38,10 +38,10 @@
 
 
 
-        <div class="formulaire">{{ form(formCom) }}</div>
+        {{ form(formCom) }}
     <div id="comment-main-box">
 
-        <div id="comment-title">Correspondance Professeur/Parent</div>
+        <div id="comment-title" >Correspondance Professeur/Parent</div>
 
         {% for comment in comments  %}
             {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id or comment.sender.idrank == 2 and comment.receiver.id == app.user.id%}

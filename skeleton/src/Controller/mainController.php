@@ -85,8 +85,8 @@ class mainController extends securityController
 
 
         $form = $this->createFormBuilder($com)
-            ->add('comment',TextareaType::class)
-            ->add('save',SubmitType::class)
+            ->add('comment',TextareaType::class,[ "label"=> false,"attr"=>["class"=> "txtarea"]])
+            ->add('save',SubmitType::class,["label"=>"commenter","attr"=>["class"=> "submit"]])
             ->getForm();
 
        $form->handleRequest($request);

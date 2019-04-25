@@ -161,10 +161,19 @@ table{
     }
     #pppp{
         display: inline-block;
-        width: 350px;
+        width: 325px;
         height: 200px;
-        margin: auto;
+       margin-left: 0;
 
+
+    }
+    .txtarea{
+
+        width: 100%;
+    }
+    .submit{
+        display: block;
+        margin:auto;
     }
 
 
