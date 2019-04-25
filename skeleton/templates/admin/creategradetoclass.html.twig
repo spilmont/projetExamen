@@ -4,7 +4,7 @@
     <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
     <h1> enregistrement des notes de {{ skill }} de la classe de {{ users[0].class }}</h1>
 
-    <form method="post" action="">
+    <form  method="post" action="">
         {% for user in users if user.idrank ==3%}
 
             <label for="grade{{ user.id }}">{{ user.lastname }} {{ user.firstname}}</label>

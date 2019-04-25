@@ -52,7 +52,7 @@ class User implements UserInterface, \Serializable
     private $idrank;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Grade", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Grade", mappedBy="user",cascade={"remove"})
      */
     private $grades;
 
@@ -62,12 +62,12 @@ class User implements UserInterface, \Serializable
     private $class;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comments", mappedBy="receiver")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comments", mappedBy="receiver",cascade={"remove"})
      */
     private $receiver;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comments", mappedBy="sender")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comments", mappedBy="sender",cascade={"remove"})
      */
     private $sender;
 
