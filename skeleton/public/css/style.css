@@ -5,6 +5,19 @@ h1{
     display: inline-block;
 }
 
+#dd
+{
+    display: none;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    border: #222222 solid;
+    background-color: white;
+
+
+}
+
+
 header{
     background-color: cornflowerblue;
     border-bottom-right-radius: 20px;
@@ -177,7 +190,12 @@ table{
     }
 
 
-
+    #dd{
+        width: 200px;
+        height: auto;
+        position: absolute;
+        border: #222222 solid;
+    }
 }
     
 

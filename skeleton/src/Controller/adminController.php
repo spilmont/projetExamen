@@ -320,12 +320,38 @@ class adminController extends AbstractController
 
 
         }
-
-
-
-
-
         return $this->render("admin/comments.html.twig",['sender'=>$idstudient,'comments'=>$comments,'formCom'=>$form->createView()]);
+    }
+
+    /**
+     * @Route("/admin/ajaxlink/{id}", name="ajax_link")
+     */
+    public  function ajaxlink($id){
+
+        $repouser= $this->getDoctrine()->getRepository(User::class);
+        $user = $repouser->find($id);
+
+        if($user->getidrank() ==3 and $this->getUser()->getclass() == $user->getclass()){
+
+            $idgrade = $user->getid();
+        }
+        else{
+            $idgrade = "hidden";
+        }
+
+
+        return $this->json(["nom"=>$user->getlastname(),'prenom'=>$user->getfirstname(),
+            'id'=>$user->getid(),"idgrade"=>$idgrade
+
+                    ]);
+
+
+
+
+
+
+
+
 
 
 

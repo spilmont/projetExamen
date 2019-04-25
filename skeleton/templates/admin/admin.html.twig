@@ -31,11 +31,12 @@
     </tr>
     {%if lastname is empty and class is empty %}
     {% for i in user  %}
+        {%  set p = i.id  %}
     <tr>
         <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
         <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
-                <td>{{ i.id }}</td>
-                <td>{{ i.lastname }}</td>
+                <td><a id="nom" href="{{ path('ajax_link',{'id':i.id}) }}" >{{ i.id }}</a></td>
+                <td >{{ i.lastname }}</td>
                 <td>{{ i.firstname }}</td>
                 <td class="mdp hide">{{ i.password }}</td>
                 <td>{{ i.usercode }}</td>
@@ -96,4 +97,50 @@
         {% endfor %}
     {% endif %}
 </table>
+    <div id="dd" ></div>
+    <script  src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+       document.querySelectorAll('a#nom').forEach(function (a) {
+
+            a.addEventListener("click", function() {
+                event.preventDefault();
+
+
+
+                axios.get("/admin/ajaxlink/"+this.innerHTML).then(function (response) {
+
+                    console.log(response);
+                    document.getElementById('dd').style.display = "block";
+
+
+                    document.getElementById('dd').innerHTML =
+                        response.data.nom+" "+response.data.prenom+"<br><br>"+
+                        "<a href='/admin/update/"+response.data.id+"'> modifier</a><br>"+
+                        "<a href='/admin/message/"+response.data.id+"'>messagerie</a><br>"+
+                        "<a id='noter' href='admin/"+response.data.idgrade+"/gradetouser'>noter</a>"
+
+                    if(response.data.idgrade == "null" ){
+                        document.getElementById('noter ').style.visibility = "hidden";
+                    }
+
+                })
+
+
+
+
+
+
+
+
+            })
+
+
+
+
+        })
+
+
+
+    </script>
 {% endblock %}
