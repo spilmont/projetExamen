@@ -1,12 +1,15 @@
 h1{
     text-align: center;
 }
+.connection{
+    display: inline-block;
+}
 
 header{
     background-color: cornflowerblue;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius:  20px;
-    height: 120px;
+    height: 130px;
     color: white;
 }
 #filter{
@@ -125,6 +128,16 @@ table{
 }
 @media (max-width: 600px) {
 
+    header{
+        height: auto;
+    }
+
+    .connection{
+        display: block;
+    }
+    .pass{
+        margin-left: 5%;
+    }
     .hide{
         display: none;
     }
@@ -146,6 +159,14 @@ table{
         display: none;
 
     }
+    #pppp{
+        display: inline-block;
+        width: 350px;
+        height: 200px;
+        margin: auto;
+
+    }
+
 
 
 }
