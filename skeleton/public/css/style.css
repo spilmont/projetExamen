@@ -8,8 +8,11 @@ h1{
 #dd
 {
     display: none;
-    width: 300px;
-    height: 300px;
+    padding: 10px;
+    margin: 0 45% 0 45%;
+    top: 50%;
+    border-radius: 20px;
+
     position: absolute;
     border: #222222 solid;
     background-color: white;
@@ -110,22 +113,6 @@ table{
     text-align: center;
 }
 
-#hamburger-menu > a{
-    display: inline-block;
-    width: auto;
-    margin-right: 15px;
-    cursor: pointer;
-}
-
-#hamburger-menu >span {
-    display: none;
-    text-align: center;
-    line-height:  5px;
-    width: 80%;
-    border-radius: 20px;
-    padding:  10px;
-    background-color: cornflowerblue;
-}
 
 #navigation{
     text-align: center;
@@ -156,22 +143,7 @@ table{
     }
 
 
-    #hamburger-menu > a{
-        display: none;
-    }
-    #hamburger-menu > span{
-        display: inline-block;
-    }
-    #hamburger-menu:hover >a{
-        width: 80%;
-        display: block;
-        margin: 10px auto;
-    }
-    #hamburger-menu:hover > span
-    {
-        display: none;
 
-    }
     #pppp{
         display: inline-block;
         width: 325px;
@@ -187,14 +159,24 @@ table{
     .submit{
         display: block;
         margin:auto;
+        margin-bottom: 111px;
     }
 
 
     #dd{
-        width: 200px;
+
         height: auto;
         position: absolute;
         border: #222222 solid;
+
+    }
+    #navigation>a{
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        width: 80%;
+        margin-bottom: 10px;
     }
 }
     

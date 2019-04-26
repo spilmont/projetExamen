@@ -5,12 +5,9 @@
 <h1>Panneau administrateur</h1>
 
 <nav id="navigation">
-    <div id="hamburger-menu">
-        <span>|||</span>
     <a class="buttonnav"  href="{{ path('user_by_admin') }}">entrer un nouvel eleve</a>
     <a class="buttonnav"  href="{{ path('show_skill') }}">vers les compétences</a>
     <a class="buttonnav"  href="{{ path('choice_grade') }}"> enregistrement des notes par classe</a>
-    </div>
 </nav>
 
 
@@ -31,7 +28,7 @@
     </tr>
     {%if lastname is empty and class is empty %}
     {% for i in user  %}
-        {%  set p = i.id  %}
+
     <tr>
         <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
         <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
@@ -92,8 +89,6 @@
             </tr>
 
 
-
-
         {% endfor %}
     {% endif %}
 </table>
@@ -120,26 +115,19 @@
                         "<a href='/admin/message/"+response.data.id+"'>messagerie</a><br>"+
                         "<a id='noter' href='admin/"+response.data.idgrade+"/gradetouser'>noter</a>"
 
-                    if(response.data.idgrade == "null" ){
-                        document.getElementById('noter ').style.visibility = "hidden";
-                    }
-
                 })
-
-
-
-
-
-
-
-
             })
+        });
 
+       document.addEventListener("keypress", function (e) {
 
+         if(e.which == 27){
 
+             document.getElementById('dd').style.display ="none";
 
-        })
+       }
 
+       })
 
 
     </script>
