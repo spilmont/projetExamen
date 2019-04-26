@@ -48,20 +48,20 @@ class adminController extends AbstractController
         // create formbuilder for enter information of studient
         if($this->isGranted('ROLE_SUPERADMIN')){
             $form = $this->createFormBuilder($user)
-                ->add('lastname', TextType::class, ['label' => 'nom : '])
-                ->add('firstname', TextType::class, ['label' => 'prénom : '])
-                ->add('plainPassword', PasswordType::class, ['label' => 'mot de passe : '])
-                ->add('usercode', TextType::class, ['label' => 'code élève : '])
+                ->add('lastname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"nom"]])
+                ->add('firstname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"prenom"]])
+                ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
+                ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
                 ->add('class',ChoiceType::class,["label"=>false,"choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
                 ->add('idrank', ChoiceType::class, ["label"=>false,"choices"=>["Professeur"=>1,"Directeur"=>2,"éleve"=>3]])
                 ->add('save', SubmitType::class)
                 ->getForm();
         }else{
         $form = $this->createFormBuilder($user)
-            ->add('lastname', TextType::class, ['label' => 'nom : '])
-            ->add('firstname', TextType::class, ['label' => 'prénom : '])
-            ->add('plainPassword', PasswordType::class, ['label' => 'mot de passe : '])
-            ->add('usercode', TextType::class, ['label' => 'code élève : '])
+            ->add('lastname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"nom"]])
+            ->add('firstname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"prenom"]])
+            ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
+            ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
             ->add('save', SubmitType::class)
             ->getForm();
     };
@@ -176,20 +176,20 @@ class adminController extends AbstractController
 
         if($this->isGranted('ROLE_SUPERADMIN')){
             $form = $this->createFormBuilder($user)
-                ->add('lastname', TextType::class, ['label' => 'nom : '])
-                ->add('firstname', TextType::class, ['label' => 'prénom : '])
-                ->add('plainPassword', PasswordType::class, ['label' => 'mot de passe : '])
-                ->add('usercode', TextType::class, ['label' => 'code élève : '])
-                ->add('class',ChoiceType::class,["choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
-                ->add('idrank', IntegerType::class, ['attr' => ['min' => 1, 'max' => 3]])
+                ->add('lastname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"nom"]])
+                ->add('firstname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"prenom"]])
+                ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
+                ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
+                ->add('class',ChoiceType::class,["label"=>false,"choices"=>["CP"=>"CP","CE1"=>"CE1","CE2"=>"CE2","CM1"=>"CM1","CM2"=>"CM2"]])
+                ->add('idrank', ChoiceType::class, ["label"=>false,"choices"=>["Professeur"=>1,"Directeur"=>2,"éleve"=>3]])
                 ->add('save', SubmitType::class)
                 ->getForm();
         }else{
             $form = $this->createFormBuilder($user)
-                ->add('lastname', TextType::class, ['label' => 'nom : '])
-                ->add('firstname', TextType::class, ['label' => 'prénom : '])
-                ->add('PlainPassword', PasswordType::class, ['label' => 'mot de passe : '])
-                ->add('usercode', TextType::class, ['label' => 'code élève : '])
+                ->add('lastname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"nom"]])
+                ->add('firstname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"prenom"]])
+                ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
+                ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
                 ->add('save', SubmitType::class)
                 ->getForm();
         }
@@ -252,14 +252,14 @@ class adminController extends AbstractController
 
         if($this->isGranted('ROLE_SUPERADMIN')) {
             $form = $this->createFormBuilder($user)
-                ->add('lastname', TextType::class, ['label' => 'nom', 'required' => false])
-                ->add('class', ChoiceType::class, ['label' => 'classe', 'required' => false,
+                ->add('lastname', TextType::class, ['label' => false, 'required' => false,"attr"=>['placeholder'=>"filtrer par nom"]])
+                ->add('class', ChoiceType::class, ['label' => false, 'required' => false,
                     'choices' => ["tous" => "", "CP" => "CP", 'CE1' => 'CE1', 'CE2' => 'CE2', 'CM1' => 'CM1', 'CM2' => 'CM2']])
                 ->add('save', SubmitType::class, ['label' => 'filtrer'])
                 ->getForm();
         }else{
             $form = $this->createFormBuilder($user)
-                ->add('lastname', TextType::class, ['label' => 'nom', 'required' => false])
+                ->add('lastname', TextType::class, ['label' => false, 'required' => false,"attr"=>['placeholder'=>"filtrer par nom"]])
                 ->add('save', SubmitType::class, ['label' => 'filtrer'])
                 ->getForm();
         }
@@ -299,7 +299,7 @@ class adminController extends AbstractController
 
 
         $form = $this->createFormBuilder($com)
-            ->add('comment',TextareaType::class)
+            ->add('comment',TextareaType::class,["label"=>false,"attr"=>['placeholder'=>"entrer un commentaire"]])
             ->add('save',SubmitType::class)
             ->getForm();
 

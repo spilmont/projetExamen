@@ -35,7 +35,7 @@ class skillController extends AbstractController
         // create forbuilder for skill
 
         $form = $this->createFormBuilder($skill)
-            ->add('skill', TextType::class,['label'=>'compétence'])
+            ->add('skill', TextType::class,['label'=>false,"attr"=>['placeholder'=>"competence"]])
             ->add('save', SubmitType::class,['label'=>'ajouter la compétences'])
             ->getForm();
 

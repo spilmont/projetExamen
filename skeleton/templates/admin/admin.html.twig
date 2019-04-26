@@ -110,6 +110,7 @@
 
 
                     document.getElementById('dd').innerHTML =
+                        "<div >[  X  ]</div>"+
                         response.data.nom+" "+response.data.prenom+"<br><br>"+
                         "<a href='/admin/update/"+response.data.id+"'> modifier</a><br>"+
                         "<a href='/admin/message/"+response.data.id+"'>messagerie</a><br>"+
@@ -121,13 +122,27 @@
 
        document.addEventListener("keypress", function (e) {
 
-         if(e.which == 27){
+           var keynum = e.which;
+         if(keynum === 27){
 
              document.getElementById('dd').style.display ="none";
 
        }
 
        })
+
+
+
+       document.getElementById('dd').addEventListener("click", function () {
+
+
+               document.getElementById('dd').style.display ="none";
+
+
+
+       })
+
+
 
 
     </script>
