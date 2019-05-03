@@ -34,18 +34,18 @@
 
 
 
-    <div id="pppp"><canvas id="myChart" ></canvas></div>
+    <div id="graphic"><canvas id="myChart" ></canvas></div>
 
 
 
-        {{ form(formCom) }}
+        <div class="formulaire-com">{{ form(formCom) }} </div>
     <div id="comment-main-box">
 
         <div id="comment-title" >Correspondance Professeur/Parent</div>
 
         {% for comment in comments  %}
-            {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id or comment.sender.idrank == 2 and comment.receiver.id == app.user.id%}
-            <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} les parents de{% elseif comment.sender.idrank == 2  %} Le directeur  {% else %} le professeur {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
+            {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id and comment.receiver.id == app.user.id%}
+            <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} les parents de {% else %} le professeur {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
             <span class="commentaire">{{ comment.comment }}</span>
 
             {% endif %}
@@ -65,10 +65,6 @@
                     // handle success
 
                     console.log(response);
-
-                    var skills = [];
-                    var grades = [];
-
 
                     skills = response.data.skills;
                     grades = response.data.grades;
@@ -117,13 +113,7 @@
         }
 
         document.querySelectorAll('a.skill').forEach(function (a) {
-
-
-
-
             a.addEventListener("click",onclickdivskill)
-
-
         });
 
 
@@ -132,9 +122,6 @@
         var grades = [];
         var elt = {{ objgrade |  raw  }}
         console.log(elt);
-
-
-
 
         for(let i =0;i<elt.length;i++){
 
@@ -162,10 +149,8 @@
 
 
             var chart = new Chart(ctx, {
-                // The type of chart we want to create
-                type: 'radar',
 
-                // The data for our dataset
+                type: 'radar',
 
                 data: {
                     labels: skills,

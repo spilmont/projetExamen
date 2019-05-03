@@ -35,8 +35,8 @@ class skillController extends AbstractController
         // create forbuilder for skill
 
         $form = $this->createFormBuilder($skill)
-            ->add('skill', TextType::class,['label'=>false,"attr"=>['placeholder'=>"competence"]])
-            ->add('save', SubmitType::class,['label'=>'ajouter la compétences'])
+            ->add('skill', TextType::class,['label'=>false,"attr"=>['placeholder'=>"competence","class"=>"field"]])
+            ->add('save', SubmitType::class,['label'=>'ajouter la compétences',"attr"=>["class"=>"field"]])
             ->getForm();
 
         $form->handleRequest($request);
@@ -96,8 +96,8 @@ class skillController extends AbstractController
         $skill = $em->getRepository(Skill::class)->find($id);
 
         $form = $this->createFormBuilder($skill)
-            ->add('skill', TextType::class,['label'=>'compétence'])
-            ->add('save', SubmitType::class,['label'=>'ajouter la compétences'])
+            ->add('skill', TextType::class,['label'=>'compétence',"attr"=>["class"=>"field"]])
+            ->add('save', SubmitType::class,['label'=>'ajouter la compétences',"attr"=>["class"=>"field"]])
             ->getForm();
 
         $form->handleRequest($request);

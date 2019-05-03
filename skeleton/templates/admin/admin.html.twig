@@ -2,147 +2,149 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Panneau administrateur</h1>
+    <h1>Panneau administrateur</h1>
 
-<nav id="navigation">
-    <a class="buttonnav"  href="{{ path('user_by_admin') }}">entrer un nouvel eleve</a>
-    <a class="buttonnav"  href="{{ path('show_skill') }}">vers les compétences</a>
-    <a class="buttonnav"  href="{{ path('choice_grade') }}"> enregistrement des notes par classe</a>
-</nav>
+    <nav id="navigation">
+        <a class="buttonnav" href="{{ path('user_by_admin') }}">entrer un nouvel eleve</a>
+        <a class="buttonnav" href="{{ path('show_skill') }}">vers les compétences</a>
+        <a class="buttonnav" href="{{ path('choice_grade') }}"> enregistrement des notes par classe</a>
+    </nav>
 
 
     <span id="filter">{{ form(filter) }}</span>
-<table>
-    <tr>
-        <th class="hide"></th>
-        <th class="hide"></th>
-        <th>id</th>
-        <th>nom</th>
-        <th>prenom</th>
-        <th class="mdp hide">mot de passe</th>
-        <th>code utilisateur</th>
-        <th>id_rank</th>
-        <th>class</th>
-        <th class="hide">messagerie</th>
-        <th class="hide">note</th>
-    </tr>
-    {%if lastname is empty and class is empty %}
-    {% for i in user  %}
+    <table>
+        <tr>
+            <th class="hide"></th>
+            <th class="hide"></th>
+            <th>id</th>
+            <th>nom</th>
+            <th>prenom</th>
+            <th class="mdp hide">mot de passe</th>
+            <th>code utilisateur</th>
+            <th>id_rank</th>
+            <th>class</th>
+            <th class="hide">messagerie</th>
+            <th class="hide">note</th>
+        </tr>
+        {% if lastname is empty and class is empty %}
+            {% for i in user %}
 
-    <tr>
-        <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
-        <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
-                <td><a id="nom" href="{{ path('ajax_link',{'id':i.id}) }}" >{{ i.id }}</a></td>
-                <td >{{ i.lastname }}</td>
-                <td>{{ i.firstname }}</td>
-                <td class="mdp hide">{{ i.password }}</td>
-                <td>{{ i.usercode }}</td>
-                <td>{{ i.idrank }}</td>
-                <td>{{ i.class }}</td>
-        <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
+                <tr>
+                    <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                    <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+                    <td><a id="nom" href="{{ path('ajax_link',{'id':i.id}) }}">{{ i.id }}</a></td>
+                    <td>{{ i.lastname }}</td>
+                    <td>{{ i.firstname }}</td>
+                    <td class="mdp hide">{{ i.password }}</td>
+                    <td>{{ i.usercode }}</td>
+                    <td>{{ i.idrank }}</td>
+                    <td>{{ i.class }}</td>
                     {% if i.idrank == 3  and i.class == app.user.class %}
+                    <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
                     <td class="hide"><a href="{{ path('create_grade_user',{'iduser': i.id}) }}">noter</a></td>
                     {% endif %}
 
-            </tr>
+                </tr>
 
 
-        {% endfor %}
-    {% endif %}
-    {% if lastname is not empty  %}
-        {% for i in user  if i.lastname == lastname %}
-            <tr>
-                <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
-                <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
-                <td>{{ i.id }}</td>
-                <td>{{ i.lastname }}</td>
-                <td>{{ i.firstname }}</td>
-                <td class="mdp hide">{{ i.password }}</td>
-                <td>{{ i.usercode }}</td>
-                <td>{{ i.idrank }}</td>
-                <td>{{ i.class }}</td>
-                <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
-                {% if i.idrank == 3  and i.class == app.user.class %}
+            {% endfor %}
+        {% endif %}
+        {% if lastname is not empty %}
+            {% for i in user  if i.lastname == lastname %}
+                <tr>
+                    <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                    <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+                    <td><a id="nom" href="{{ path('ajax_link',{'id':i.id}) }}">{{ i.id }}</a></td>
+                    <td>{{ i.lastname }}</td>
+                    <td>{{ i.firstname }}</td>
+                    <td class="mdp hide">{{ i.password }}</td>
+                    <td>{{ i.usercode }}</td>
+                    <td>{{ i.idrank }}</td>
+                    <td>{{ i.class }}</td>
+                    {% if i.idrank == 3  and i.class == app.user.class %}
+                    <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
                     <td class="hide"><a href="{{ path('create_grade_user',{'iduser': i.id}) }}">noter</a></td>
-                {% endif %}
+                    {% endif %}
 
 
-            </tr>
-        {% endfor %}
-    {% endif %}
-    {% if class is not empty  %}
-        {% for i in user  if i.class == class %}
-            <tr>
-                <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
-                <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
-                <td>{{ i.id }}</td>
-                <td>{{ i.lastname }}</td>
-                <td>{{ i.firstname }}</td>
-                <td>{{ i.password }}</td>
-                <td>{{ i.usercode }}</td>
-                <td>{{ i.idrank }}</td>
-                <td>{{ i.class }}</td>
-                <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
-                {% if i.idrank == 3  and i.class == app.user.class %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+        {% if class is not empty %}
+            {% for i in user  if i.class == class or  i.id == app.user.id %}
+                <tr>
+                    <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                    <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
+                    <td><a id="nom" href="{{ path('ajax_link',{'id':i.id}) }}">{{ i.id }}</a></td>
+                    <td>{{ i.lastname }}</td>
+                    <td>{{ i.firstname }}</td>
+                    <td class="hide">{{ i.password }}</td>
+                    <td>{{ i.usercode }}</td>
+                    <td>{{ i.idrank }}</td>
+                    <td>{{ i.class }}</td>
+                    {% if i.idrank == 3  and i.class == app.user.class %}
+                    <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
                     <td class="hide"><a href="{{ path('create_grade_user',{'iduser': i.id}) }}">noter</a></td>
-                {% endif %}
-            </tr>
+                    {% endif %}
+                </tr>
 
 
-        {% endfor %}
-    {% endif %}
-</table>
-    <div id="dd" ></div>
-    <script  src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            {% endfor %}
+        {% endif %}
+
+    </table>
+    <div id="dd"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
 
-       document.querySelectorAll('a#nom').forEach(function (a) {
+        document.querySelectorAll('a#nom').forEach(function (a) {
 
-            a.addEventListener("click", function() {
+            a.addEventListener("click", function () {
                 event.preventDefault();
 
 
-
-                axios.get("/admin/ajaxlink/"+this.innerHTML).then(function (response) {
+                axios.get("/admin/ajaxlink/" + this.innerHTML).then(function (response) {
 
                     console.log(response);
                     document.getElementById('dd').style.display = "block";
 
 
-                    document.getElementById('dd').innerHTML =
-                        "<div >[  X  ]</div>"+
-                        response.data.nom+" "+response.data.prenom+"<br><br>"+
-                        "<a href='/admin/update/"+response.data.id+"'> modifier</a><br>"+
-                        "<a href='/admin/message/"+response.data.id+"'>messagerie</a><br>"+
-                        "<a id='noter' href='admin/"+response.data.idgrade+"/gradetouser'>noter</a>"
-
+                    if ( response.data.idgrade !== "hidden") {
+                        document.getElementById('dd').innerHTML =
+                            "<img class='ico' src='https://img.icons8.com/metro/26/000000/delete-sign.png' alt='close'>" +
+                            "<div>" + response.data.nom + " " + response.data.prenom + "</div><br><br>" +
+                            "<a href='/admin/update/" + response.data.id + "'> modifier</a><br>" +
+                            "<a href='/admin/message/" + response.data.id + "'>messagerie</a><br>" +
+                            "<a id='noter' href='admin/" + response.data.idgrade + "/gradetouser'>noter</a>"
+                    }else{
+                        document.getElementById('dd').innerHTML =
+                            "<img class='ico' src='https://img.icons8.com/metro/26/000000/delete-sign.png'>" +
+                            "<div>" + response.data.nom + " " + response.data.prenom + "</div><br><br>" +
+                            "<a href='/admin/update/" + response.data.id + "'> modifier</a><br>"
+                    }
                 })
             })
         });
 
-       document.addEventListener("keypress", function (e) {
+        document.addEventListener("keypress", function (e) {
 
-           var keynum = e.which;
-         if(keynum === 27){
+            var keynum = e.which;
+            if (keynum === 27) {
 
-             document.getElementById('dd').style.display ="none";
+                document.getElementById('dd').style.display = "none";
 
-       }
+            }
 
-       })
-
-
-
-       document.getElementById('dd').addEventListener("click", function () {
+        })
 
 
-               document.getElementById('dd').style.display ="none";
+        document.getElementById('dd').addEventListener("click", function () {
 
 
+            document.getElementById('dd').style.display = "none";
 
-       })
 
-
+        })
 
 
     </script>

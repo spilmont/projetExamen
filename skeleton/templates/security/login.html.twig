@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
 {% block header %}
     <h1>Groupe Scolaire Kiésitpa</h1>
     <form  action="{{ path('login') }}" method="post">
@@ -14,13 +13,10 @@
 
         <button type="submit">connection</button>
     </form>
-
     {% if error %}
     <div id="error" >Code utilisateur ou mot de passe incorect</div>
 {% endif %}
 {% endblock %}
 {% block body %}
-
-
 
 {% endblock %}

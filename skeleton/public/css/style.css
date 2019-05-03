@@ -31,6 +31,7 @@ header{
     height: 130px;
     color: white;
 }
+
 #filter{
     text-align: center;
    margin-top:20px;
@@ -38,6 +39,10 @@ header{
 
 input{
     border-radius: 20px;
+}
+.field{
+    border-radius: 20px;
+    margin-bottom: 5px;
 }
 
 #error{
@@ -60,17 +65,25 @@ input{
 
 }
 
-#pppp{
+#graphic{
     display: inline-block;
     width: 600px;
     height: 300px;
     margin: auto;
+
 
 }
 
 
 .formulaire{
     width: 13%;
+    line-height: 200%;
+    text-align: center;
+    margin: auto;
+
+}
+.formulaire-com{
+    width: 60%;
     line-height: 200%;
     text-align: center;
     margin: auto;
@@ -95,12 +108,13 @@ h5{
 
 #averagegrade{
 
+    font-size: 1.7em;
     display: inline-block;
     text-align: center;
     border: black solid;
-    margin-left: 10%;
-    margin-right: 15%;
-    margin-bottom:3%;
+    margin-left: 20%;
+    margin-right: 10%;
+
 
 
 }
@@ -131,7 +145,10 @@ table{
 
 }
 @media (max-width: 600px) {
-
+    .ico
+    {
+        flaot: right
+    }
     header{
         height: auto;
     }
@@ -148,7 +165,7 @@ table{
 
 
 
-    #pppp{
+    #graphic{
         display: inline-block;
         width: 330px;
         height: 200px;
@@ -183,6 +200,7 @@ table{
         margin-bottom: 10px;
     }
     #averagegrade{
+        font-size: 1.5em;
         text-align: center;
         margin: 0;
         display: block;

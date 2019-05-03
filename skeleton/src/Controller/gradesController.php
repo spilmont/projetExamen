@@ -35,15 +35,16 @@ class gradesController extends AbstractController
         $reposkill = $this->getDoctrine()->getRepository(Skill::class);
         $skill = $reposkill->find($idskill);
         $repouser = $this->getDoctrine()->getRepository(User::class);
-        $users = $repouser->findBy(["class"=>$class]);
+        $users = $repouser->findBy(["class"=>$class,"idrank"=>3]);
 
 
 
-        if( !empty($_POST)){
+
 
         foreach ($users as $user){
             $grades = new Grade();
 
+            if( !empty($_POST["grade".$user->getId()])){
             $formgrade = filter_var($_POST["grade".$user->getId()],FILTER_SANITIZE_NUMBER_INT);
 
         $grades->setSkill($skill);
@@ -54,8 +55,11 @@ class gradesController extends AbstractController
             $em->flush();
 
 
-        }
+        }else{}
+
     }
+
+
         return $this->render("admin\creategradetoclass.html.twig", ["users"=>$users,"skill" => $skill]);
     }
 
@@ -113,10 +117,11 @@ class gradesController extends AbstractController
             ->add('skill',EntityType::class,[
                 "class"=>Skill::class,
                 'choice_label' => 'skill',
+                "attr"=>["class"=>"field"]
 
             ])
 
-            ->add('save',SubmitType::class)
+            ->add('save',SubmitType::class,["attr"=>["class"=>"field"]])
 
             ->getForm();
 
@@ -141,12 +146,6 @@ class gradesController extends AbstractController
 
 
     }
-
-
-
-
-
-
 
 
 }

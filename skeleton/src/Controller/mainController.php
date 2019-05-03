@@ -130,17 +130,10 @@ class mainController extends securityController
      */
     public function totalgrade(User $user, $selectskill ){
 
-
-
         $reposkill = $this->getDoctrine()->getRepository(Skill::class);
         $repograde = $this->getDoctrine()->getRepository(Grade::class);
         $skills = $reposkill->findOneBy(["skill"=>$selectskill]);
         $grades = $repograde->findBy([ "skill" => $skills,"user"=>$user]);
-
-
-        $lastname = $user->getLastname();
-        $firstname = $user->getFirstname();
-
 
         $gradeskills = [];
         $totalgrades = [];
@@ -150,10 +143,7 @@ class mainController extends securityController
             $totalgrades []=$grade->getgrades();
 
         }
-
         return $this->json(["skills"=>$gradeskills,"grades"=>$totalgrades],200);
-
-
     }
 
 
