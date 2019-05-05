@@ -13,6 +13,8 @@ use App\Entity\Grade;
 use App\Entity\Skill;
 use App\Entity\User;
 
+use App\Repository\SkillRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Tests\Compiler\G;
@@ -108,17 +110,24 @@ class gradesController extends AbstractController
     public function choice(Request $request){
 
         $reposkill = $this->getDoctrine()->getRepository(Skill::class);
-        $skill = $reposkill->findAll();
+        $skill = $reposkill->findBy(["class"=>$this->getUser()->getclass()]);
         $repouser = $this->getDoctrine()->getRepository(User::class);
-        $user = $repouser->findAll();
+        $user = $repouser->findBy(["class"=>$this->getUser()->getclass(),"idrank"=>3]);
 
 
         $form = $this->createFormBuilder($user)
             ->add('skill',EntityType::class,[
                 "class"=>Skill::class,
                 'choice_label' => 'skill',
+                'query_builder' => function (SkillRepository $er) {
+                    return $er->createQueryBuilder('s')
+                        ->select('s')
+                        ->distinct(true)
+                        //->groupBy('s.skill')
+                        ->where('s.class = :class')
+                        ->setParameter('class',$this->getUser()->getclass());
+                },
                 "attr"=>["class"=>"field"]
-
             ])
 
             ->add('save',SubmitType::class,["attr"=>["class"=>"field"]])

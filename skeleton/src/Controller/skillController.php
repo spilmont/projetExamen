@@ -11,6 +11,7 @@ namespace App\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,6 +43,9 @@ class skillController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted()and $form->isValid()){
+
+            $skill->setClass($this->getUser()->getClass());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($skill);
             $em->flush();
@@ -61,7 +65,7 @@ class skillController extends AbstractController
         // return the skill panel
 
         $repository = $this->getDoctrine()->getRepository(Skill::class);
-        $skill = $repository->findAll();
+        $skill = $repository->findBy(["class"=>$this->getUser()->getclass()]);
 
         return $this->render("admin/skill.html.twig", ["skill" => $skill,]);
 

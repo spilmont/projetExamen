@@ -30,16 +30,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class mainController extends securityController
 {
     /**
-     * @return mixed
      * @Route("/",name="homepage")
      */
     public function homepage(Request $request, AuthenticationUtils $authenticationUtils)
-    {
-        //   return the homepage view
+    {//   return the homepage view
         $error = $authenticationUtils->getLastAuthenticationError();
-
         $lastUsername = $authenticationUtils->getLastUsername();
-
 
         if (true === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin');
@@ -56,8 +52,6 @@ class mainController extends securityController
 
             ]);
         }
-
-
     }
 
 
@@ -85,8 +79,8 @@ class mainController extends securityController
 
 
         $form = $this->createFormBuilder($com)
-            ->add('comment',TextareaType::class,[ "label"=> false,"attr"=>["placeholder"=>"entreer un commentaire","class"=> "txtarea"]])
-            ->add('save',SubmitType::class,["label"=>"commenter","attr"=>["class"=> "submit"]])
+            ->add('comment',TextareaType::class,[ "label"=> false,"attr"=>["placeholder"=>"entreer un commentaire","class"=> "txtarea field"]])
+            ->add('save',SubmitType::class,["label"=>"commenter","attr"=>["class"=> "submit field"]])
             ->getForm();
 
        $form->handleRequest($request);

@@ -28,6 +28,11 @@ class Skill
      */
     private $grades;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $class;
+
     public function __construct()
     {
         $this->grades = new ArrayCollection();
@@ -83,5 +88,17 @@ class Skill
     public function __toString()
     {
         return $this->getSkill();
+    }
+
+    public function getClass(): ?string
+    {
+        return $this->class;
+    }
+
+    public function setClass(string $class): self
+    {
+        $this->class = $class;
+
+        return $this;
     }
 }

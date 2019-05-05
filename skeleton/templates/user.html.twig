@@ -44,7 +44,7 @@
         <div id="comment-title" >Correspondance Professeur/Parent</div>
 
         {% for comment in comments  %}
-            {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id and comment.receiver.id == app.user.id%}
+            {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id %}
             <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} les parents de {% else %} le professeur {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
             <span class="commentaire">{{ comment.comment }}</span>
 
@@ -63,14 +63,9 @@
             axios.get('/user/totalgrades/'+this.innerHTML+'/{{ nom }}/{{ prenom }}')
                 .then(function (response) {
                     // handle success
-
                     console.log(response);
-
                     skills = response.data.skills;
                     grades = response.data.grades;
-
-
-
                     var ctx = document.getElementById('myChart').getContext('2d');
 
                     var myLineChart = new Chart(ctx, {
@@ -95,19 +90,12 @@
                                 }],
                                 xAxes: [{
                                     display: false
-
-
-
                                 }]
                             }
                         }
-
-
                     });
-
                 })
                 .catch(function (error) {
-                    // handle error
                     console.log(error);
                 });
         }
@@ -136,17 +124,7 @@
  console.log(skills);
         console.log(grades);
 
-
-
-
-
-
         var ctx = document.getElementById('myChart').getContext('2d');
-
-
-
-
-
 
             var chart = new Chart(ctx, {
 
@@ -183,17 +161,9 @@
                 }
 
             });
-
-
-
-
-
     </script>
     {% else %}
     <h1>vous n'avez pas acces a cette utilisateur</h1>
     {% endif %}
 {% endblock %}
 
-{% block javascripts %}
-
-{% endblock %}

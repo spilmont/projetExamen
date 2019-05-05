@@ -32,6 +32,11 @@ header{
     color: white;
 }
 
+.formgrade{
+    width: 25%;
+    text-align: right;
+}
+
 #filter{
     text-align: center;
    margin-top:20px;
@@ -118,8 +123,8 @@ h5{
 
 
 }
-.avg{
-    border: black solid;
+.avg {
+    border-bottom: black solid;
 }
 
 legend{
@@ -128,6 +133,7 @@ legend{
 table{
     margin: auto;
     text-align: center;
+    border-radius: 20px;
 }
 
 
@@ -147,7 +153,7 @@ table{
 @media (max-width: 600px) {
     .ico
     {
-        flaot: right
+        float: right
     }
     header{
         height: auto;
@@ -167,7 +173,7 @@ table{
 
     #graphic{
         display: inline-block;
-        width: 330px;
+        width: 350px;
         height: 200px;
        margin-left: 0;
 
@@ -189,8 +195,8 @@ table{
         height: auto;
         position: absolute;
         border: #222222 solid;
-
     }
+
     #navigation>a{
         text-align: center;
         margin-left: auto;
@@ -200,12 +206,13 @@ table{
         margin-bottom: 10px;
     }
     #averagegrade{
-        font-size: 1.5em;
+        font-size: 1em;
         text-align: center;
         margin: 0;
         display: block;
         width: 100%;
     }
+
 }
     
 
