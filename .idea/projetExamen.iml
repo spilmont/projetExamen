@@ -21,6 +21,7 @@
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/doctrine/orm" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/doctrine/persistence" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/doctrine/reflection" />
+      <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/facebook/webdriver" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/jdorn/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/ocramius/package-versions" />
@@ -31,13 +32,16 @@
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/psr/simple-cache" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/sensio/framework-extra-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/asset" />
+      <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/browser-kit" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/cache" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/config" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/css-selector" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/debug" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/dependency-injection" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/doctrine-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/dom-crawler" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/dotenv" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/filesystem" />
@@ -52,6 +56,8 @@
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/maker-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/options-resolver" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/orm-pack" />
+      <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/panther" />
+      <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/phpunit-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/polyfill-intl-icu" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/polyfill-mbstring" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/polyfill-php72" />
@@ -60,6 +66,7 @@
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/property-access" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/routing" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/stopwatch" />
+      <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/test-pack" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/twig-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/twig-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/skeleton/vendor/symfony/validator" />

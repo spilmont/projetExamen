@@ -74,7 +74,7 @@ class gradesController extends AbstractController
         $repouser = $this->getDoctrine()->getRepository(User::class);
         $user = $repouser->find($iduser);
         $reposkill = $this->getDoctrine()->getRepository(skill::class);
-        $skills = $reposkill->findAll();
+        $skills = $reposkill->findBy(["class"=>$this->getUser()->getclass() ]);
 
         if( !empty($_POST)){
 

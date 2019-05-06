@@ -69,7 +69,24 @@
       <path value="$PROJECT_DIR$/skeleton/vendor/symfony/web-profiler-bundle" />
       <path value="$PROJECT_DIR$/skeleton/vendor/symfony/profiler-pack" />
       <path value="$PROJECT_DIR$/skeleton/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/security-http" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/security-guard" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/facebook/webdriver" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/phpunit-bridge" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/browser-kit" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/test-pack" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/skeleton/vendor/symfony/panther" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings load_method="PHPUNIT_PHAR" custom_loader_path="" phpunit_phar_path="I:/phpunit.phar" />
+    </phpunit_settings>
+  </component>
 </project>
