@@ -74,8 +74,9 @@ class mainController extends securityController
         $userid = $user->getId();
         $grades = $repograde->findBy(["user" => $user->getId(), "skill" => $skills]);
         $em = $this->getDoctrine()->getManager();
-        $query= $em->createQueryBuilder()->select("s.skill","avg(g.grades)")->from(Grade::class,'g')->join("g.skill","s")->where("g.user = :studient")->groupby('g.skill')->setparameter('studient',$this->getUser()->getid())->getquery();
+        $query= $em->createQueryBuilder()->select("s.id","s.skill","avg(g.grades)")->from(Grade::class,'g')->join("g.skill","s")->where("g.user = :studient")->groupby('g.skill')->setparameter('studient',$this->getUser()->getid())->getquery();
         $gradus = $query->getResult();
+
 
 
         $form = $this->createFormBuilder($com)
@@ -89,7 +90,6 @@ class mainController extends securityController
 
 
             $com->setReceiver($users);
-            //dd($com);
             $com->setSender($user);
 
             $em = $this->getDoctrine()->getManager();
@@ -126,7 +126,7 @@ class mainController extends securityController
 
         $reposkill = $this->getDoctrine()->getRepository(Skill::class);
         $repograde = $this->getDoctrine()->getRepository(Grade::class);
-        $skills = $reposkill->findOneBy(["skill"=>$selectskill]);
+        $skills = $reposkill->findOneBy(["id"=>$selectskill]);
         $grades = $repograde->findBy([ "skill" => $skills,"user"=>$user]);
 
         $gradeskills = [];

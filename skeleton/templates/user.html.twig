@@ -21,9 +21,8 @@
         </tr>
 
        {% for key, grade in gradus %}
-
            <tr>
-               <td ><a class="skill" href="{{ path("total_grades",{"lastname":nom ,'firstname':prenom,'selectskill': grade.skill}) }}" >{{ grade.skill }}</a></td>
+               <td ><a  class="skill" id="{{ grade.id }}" href="{{ path("total_grades",{"lastname":nom ,'firstname':prenom,'selectskill': grade.skill}) }}" >{{ grade.skill }}</a></td>
               <td>{{ grade[1] | round(1,'floor')}}</td>
            </tr>
 
@@ -60,7 +59,8 @@
         function onclickdivskill(event){
             event.preventDefault();
 
-            axios.get('/user/totalgrades/'+this.innerHTML+'/{{ nom }}/{{ prenom }}')
+
+            axios.get('/user/totalgrades/'+this.getAttribute('id')+'/{{ nom }}/{{ prenom }}')
                 .then(function (response) {
                     // handle success
                     console.log(response);
