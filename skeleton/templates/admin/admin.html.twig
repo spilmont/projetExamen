@@ -93,59 +93,7 @@
         {% endif %}
 
     </table>
-    <div id="dd"></div>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-
-        document.querySelectorAll('a#nom').forEach(function (a) {
-
-            a.addEventListener("click", function () {
-                event.preventDefault();
-
-
-                axios.get("/admin/ajaxlink/" + this.innerHTML).then(function (response) {
-
-                    console.log(response);
-                    document.getElementById('dd').style.display = "block";
-
-
-                    if ( response.data.idgrade !== "hidden") {
-                        document.getElementById('dd').innerHTML =
-                            "<img class='ico' src='https://img.icons8.com/metro/26/000000/delete-sign.png' alt='close'>" +
-                            "<div>" + response.data.nom + " " + response.data.prenom + "</div><br><br>" +
-                            "<a href='/admin/update/" + response.data.id + "'> modifier</a><br>" +
-                            "<a href='/admin/message/" + response.data.id + "'>messagerie</a><br>" +
-                            "<a id='noter' href='admin/" + response.data.idgrade + "/gradetouser'>noter</a>"
-                    }else{
-                        document.getElementById('dd').innerHTML =
-                            "<img class='ico' src='https://img.icons8.com/metro/26/000000/delete-sign.png'>" +
-                            "<div>" + response.data.nom + " " + response.data.prenom + "</div><br><br>" +
-                            "<a href='/admin/update/" + response.data.id + "'> modifier</a><br>"
-                    }
-                })
-            })
-        });
-
-        document.addEventListener("keypress", function (e) {
-
-            var keynum = e.which;
-            if (keynum === 27) {
-
-                document.getElementById('dd').style.display = "none";
-
-            }
-
-        })
-
-
-        document.getElementById('dd').addEventListener("click", function () {
-
-
-            document.getElementById('dd').style.display = "none";
-
-
-        })
-
-
-    </script>
+    <div id="modal"></div>
+    <script src="{{ asset("js/Axios.js") }}"></script>
+    <script src="{{ asset("js/Modal.js") }}"></script>
 {% endblock %}

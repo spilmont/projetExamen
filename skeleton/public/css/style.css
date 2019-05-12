@@ -6,7 +6,7 @@ h1{
 }
 
 
-#dd
+#modal
 {
     display: none;
     padding: 10px;
@@ -190,7 +190,7 @@ table{
     }
 
 
-    #dd{
+    #modal{
 
         height: auto;
         position: absolute;

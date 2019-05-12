@@ -15,6 +15,7 @@ class UserTest extends TestCase
             ->setIdProf(1)
             ->setClass("CM2")
             ->setUsercode('00000')
+            ->setPassword('dd')
         ;
         $this->assertEquals("prenom",$user->getFirstname());
         $this->assertEquals("nom",$user->getLastname());

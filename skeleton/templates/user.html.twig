@@ -10,7 +10,7 @@
 
 {% block body %}
 
-
+<main>
     {% if   app.user.usercode  == usercode %}
        <h1> Notes de l'élèves : {{ nom }} {{ prenom }}</h1>
 
@@ -52,7 +52,8 @@
 
 
     </div>
-        <script  src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</main>
+        <script  src="{{ asset("js/Axios.js") }}"></script>
 
 
     <script type="text/javascript">
@@ -62,7 +63,8 @@
 
             axios.get('/user/totalgrades/'+this.getAttribute('id')+'/{{ nom }}/{{ prenom }}')
                 .then(function (response) {
-                    // handle success
+
+
                     console.log(response);
                     skills = response.data.skills;
                     grades = response.data.grades;

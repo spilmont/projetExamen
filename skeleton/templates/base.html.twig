@@ -4,6 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+
     <title>{% block title %}Welcome!{% endblock %}</title>
     <meta content="width=device-width,
     initial-scale=1" name="viewport"/>
@@ -14,7 +15,7 @@
 <body>
 
     <header>{% block header %}
-            <h1>Groupe Scolaire Kiésistpa</h1>
+            <h1>Groupe Scolaire Kinésistpa</h1>
             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
                 <p> <b>Bonjour {{ app.user.lastname }} {{ app.user.firstname }}</b> <a href=" {{ logout_path('main') }} ">Déconection</a></p>
             {% endif %}

@@ -64,6 +64,7 @@ class mainController extends securityController
 
         $reposkill = $this->getDoctrine()->getRepository(Skill::class);
         $users = $this->getDoctrine()->getRepository(User::class)->findOneBy(["id"=>$this->getUser()->getIdProf()]);
+
         $skills = $reposkill->findAll();
         $repograde = $this->getDoctrine()->getRepository(Grade::class);
         $repocomment = $this->getDoctrine()->getRepository(Comments::class);
@@ -76,7 +77,6 @@ class mainController extends securityController
         $em = $this->getDoctrine()->getManager();
         $query= $em->createQueryBuilder()->select("s.id","s.skill","avg(g.grades)")->from(Grade::class,'g')->join("g.skill","s")->where("g.user = :studient")->groupby('g.skill')->setparameter('studient',$this->getUser()->getid())->getquery();
         $gradus = $query->getResult();
-
 
 
         $form = $this->createFormBuilder($com)

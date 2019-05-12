@@ -274,21 +274,21 @@ class adminController extends AbstractController
         $com = new Comments();
 
         $repouser = $this->getDoctrine()->getRepository(User::class);
-        $sender = $repouser->find($idstudient);
+        $receiver = $repouser->find($idstudient);
 
         $repocomments= $this->getDoctrine()->getRepository(Comments::class);
         $comments = $repocomments->findby([],['id'=>'DESC']);
 
         $form = $this->createFormBuilder($com)
-            ->add('comment',TextareaType::class,["label"=>false,"attr"=>['placeholder'=>"entrer un commentaire","class"=>"field"]])
-            ->add('save',SubmitType::class,["attr"=>["class"=>"field"]])
+            ->add('comment',TextareaType::class,["label"=>false,"attr"=>['placeholder'=>"entrer un message","class"=>"field"]])
+            ->add('envoyer',SubmitType::class,["attr"=>["class"=>"field"]])
             ->getForm();
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
 
-            $com->setReceiver($sender);
+            $com->setReceiver($receiver);
 
             $com->setSender($this->getUser());
 

@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} notation par élève  {% endblock %}
+
 {% block body %}
     <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
     <h1> enregistrement des notes de {{ users.lastname }} {{ users.firstname }} de la classe de {{ users.class }}</h1>

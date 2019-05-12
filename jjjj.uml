@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>PHP</ID>
+  <OriginalElement>\App\Entity\Comments</OriginalElement>
+  <nodes>
+    <node x="734.0" y="0.0">\App\Entity\Grade</node>
+    <node x="510.0" y="0.0">\App\Entity\Skill</node>
+    <node x="0.0" y="0.0">\App\Entity\User</node>
+    <node x="264.0" y="0.0">\App\Entity\Comments</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.974248120300752" x="40.96521756923272" y="254.742454536799" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
