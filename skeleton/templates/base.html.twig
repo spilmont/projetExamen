@@ -17,14 +17,19 @@
     <header>{% block header %}
             <h1>Groupe Scolaire Kinésistpa</h1>
             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                <p> <b>Bonjour {{ app.user.lastname }} {{ app.user.firstname }}</b> <a href=" {{ logout_path('main') }} ">Déconection</a></p>
+                <p> <span>Bonjour {{ app.user.lastname }} {{ app.user.firstname }}</span> <a href=" {{ logout_path('main') }} ">Déconection</a></p>
             {% endif %}
             {% endblock %}
     </header>
+    <main>
+        <aside>
     {% block body %}
 
 
 
     {% block javascripts %}{% endblock %}
-{% endblock %}</body>
+{% endblock %}</aside>
+    </main>
+<footer></footer>
+</body>
 </html>
