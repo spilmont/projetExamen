@@ -43,7 +43,7 @@
         {% for comment in comments  %}
             {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id %}
             <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} les parents de {% else %} le professeur {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
-            <p class="commentaire">{{ comment.comment  }}</p>
+            <p class="commentaire">{{ comment.comment | nl2br }}</p>
 
             {% endif %}
         {% endfor %}
