@@ -14,7 +14,8 @@
     {% if   app.user.usercode  == usercode %}
        <h1> Notes de l'élèves : {{ nom }} {{ prenom }}</h1>
 
-<table id="averagegrade">
+        <div id="moyenne">
+        <table id="averagegrade">
         <tr>
             <th class="avg">Matières</th>
             <th class="avg">Moyennes</th>
@@ -30,11 +31,8 @@
        {% endfor %}
 
  </table>
-
-
-
-    <div id="graphic"><canvas id="myChart" ></canvas></div>
-
+        <div id="graphic"><canvas id="myChart" ></canvas></div>
+        </div>
 
 
         <div class="formulaire-com">{{ form(formCom) }} </div>
@@ -45,7 +43,7 @@
         {% for comment in comments  %}
             {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id %}
             <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} les parents de {% else %} le professeur {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
-            <span class="commentaire">{{ comment.comment }}</span>
+            <p class="commentaire">{{ comment.comment  }}</p>
 
             {% endif %}
         {% endfor %}

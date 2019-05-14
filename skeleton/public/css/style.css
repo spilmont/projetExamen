@@ -1,49 +1,66 @@
 html{
-    height: 100%;
+height: 100%;
 }
 p{
     margin: 0;
+    padding-left: 10px;
+    font-size:  24px;
 }
 
 
 body{
    margin: 0;
-    height: 100%;
+   display: flex;
+    flex-direction: column;
 
+}
+
+#form_comment{
+    width: 344px ; ;
+}
+
+#moyenne{
+    display: flex ;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 main{
     background-color: #222222;
     background-image: url("https://www.expressions-venissieux.fr/wp-content/uploads/2016/05/Parilly-257.jpg");
+    background-size: cover;
     height: 80%;
+
 }
 
 aside
 {
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255,0.9);
     min-height: 100%;
     width: 80%;
     margin: auto;
     text-align: center;
+    padding-bottom: 2%;
 }
 
 
 footer{
     background-color: cornflowerblue;
-    height: 10%;
+    height: 110px;
 
 
 }
 header{
     background-color: cornflowerblue;
 
-    height: 10%;
+    height: 110px;
     color: white;
 }
 
 h1{
     text-align: center;
     margin-top: 0;
+    padding-top: 10px ;
 }
 .connection{
     display: inline-block;
@@ -66,6 +83,7 @@ h1{
 }
 .commentaire{
     padding-left: 20px;
+
 }
 
 
@@ -86,6 +104,7 @@ input{
 .field{
     border-radius: 20px;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 #error{
@@ -94,11 +113,12 @@ input{
 }
 
 .buttonnav{
-    padding: 4px 2px 4px 2px;
+    padding: 4px 10px 4px 10px;
     text-decoration: none;
     background-color: cornflowerblue;
     color: white;
     border-radius: 20px;
+
 
 }
 
@@ -155,12 +175,8 @@ h5{
     display: inline-block;
     text-align: center;
     border: black solid;
-    margin-left: 20%;
-    margin-right: 10%;
-
-
-
 }
+
 .avg {
     border-bottom: black solid;
 }
@@ -181,81 +197,90 @@ table{
 }
 
 
-@media (max-width: 1180px) {
+@media (max-width: 1415px) {
 
-    .mdp{
-        display: none;
-    }
 
-}
-@media (max-width: 600px) {
-    .ico
-    {
-        float: right
-    }
-    header{
-        height: auto;
-    }
-
-    aside{
-        width: 100%;
-    }
-
-    .connection{
-        display: block;
-    }
-    .pass{
-        margin-left: 5%;
-    }
-    .hide{
+    .mdp {
         display: none;
     }
 
 
+    @media (max-width: 1200px) {
 
-    #graphic{
-        display: inline-block;
-        width: 350px;
-        height: 200px;
-       margin-left: 0;
+        #moyenne {
+            flex-direction: column;
+        }
 
+        .ico {
+            float: right
+        }
+
+        header {
+            height: auto;
+        }
+
+        aside {
+            width: 100%;
+        }
+
+        .connection {
+            display: block;
+        }
+
+        .pass {
+            margin-left: 5%;
+        }
+
+        .hide {
+            display: none;
+        }
+
+
+        #graphic {
+            display: inline-block;
+            width: 350px;
+            height: 200px;
+
+
+        }
+
+        .txtarea {
+
+            width: 100%;
+        }
+
+        .submit {
+            display: block;
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+
+        #modal {
+
+            height: auto;
+            position: absolute;
+            border: #222222 solid;
+        }
+
+        #navigation > a {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+
+        #averagegrade {
+            display: inline-block;
+            font-size: 1em;
+            text-align: center;
+
+
+        }
 
     }
-    .txtarea{
-
-        width: 100%;
-    }
-    .submit{
-        display: block;
-        margin:auto;
-        margin-bottom: 20px;
-    }
-
-
-    #modal{
-
-        height: auto;
-        position: absolute;
-        border: #222222 solid;
-    }
-
-    #navigation>a{
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-        width: 80%;
-        margin-bottom: 10px;
-    }
-    #averagegrade{
-        font-size: 1em;
-        text-align: center;
-        margin: 0;
-        display: block;
-        width: 100%;
-    }
-
 }
-    
 
 
