@@ -324,15 +324,28 @@ class adminController extends AbstractController
 
                     ]);
 
-
-
-
-
-
-
-
-
-
-
     }
+   /**
+   * @Route("/delete/comment//{idstudient}/{id}",name="delete_comment")
+   */
+     public function deleteComment($id,$idstudient)
+     {
+
+
+         $repocomment = $this->getDoctrine()->getRepository(Comments::class);
+         $comment = $repocomment->find($id);
+
+         $em = $this->getDoctrine()->getManager();
+         $em->remove($comment);
+         $em->flush();
+
+
+       if ($this->isGranted("ROLE_ADMIN")) {
+
+             return $this->redirectToRoute("message", ['id' => $comment->getId(),"idstudient"=>$idstudient]);
+
+         } elseif ($this->isGranted("ROLE_SUPERADMIN")) {
+             return $this->redirectToRoute("message", ['id' => $comment->getId(),"idstudient"=>$idstudient]);
+         }
+     }
 }
