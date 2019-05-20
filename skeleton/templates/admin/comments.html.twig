@@ -3,7 +3,7 @@
 
 {% block body %}
     <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
-<div class="formulaire">{{ form(formCom) }}</div>
+<div class="textform">{{ form(formCom) }}</div>
 <div id="comment-main-box">
 
     <div id="comment-title">Correspondance Professeur/Parent</div>
@@ -13,7 +13,9 @@
         {% if app.user.id == comment.sender.id and comment.receiver.id == sender or app.user.id == comment.receiver.id and comment.sender.id == sender  %}
             <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} le professeur{% elseif comment.sender.idrank ==2 %} Le directeur {% else %}les parents de  {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
             <span class="commentaire">{{ comment.comment }}</span>
-            <a  class="buttonnav" href="{#{{ path('delete_comment',{'id':comment.id,'idstudient': sender})#} }}">supprimer</a>
+            <a href="{{ path("delete_comment",{'id':comment.id,'idstudient':sender}) }}">supprimer</a>
+            <a href="{{ path("update_comment",{'id':comment.id,'idstudient':sender}) }}">modifier</a>
+
         {% endif %}
     {% endfor %}
 

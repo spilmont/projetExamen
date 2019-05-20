@@ -16,6 +16,7 @@ class GradeTest extends TestCase
            ->setUser(new User())
            ->setGrades(12);
 
+
        $this->assertInstanceOf(User::class,$grade->getUser());
        $this->assertInstanceOf(Skill::class,$grade->getSkill());
        $this->assertEquals(12,$grade->getGrades());

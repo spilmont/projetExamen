@@ -1,13 +1,15 @@
 {# twig for base model#}
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
 
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Groupe Scolaire Kiesistpa{% endblock %}</title>
     <meta content="width=device-width,
     initial-scale=1" name="viewport"/>
+    <meta name="description" content="groupe scolaire kiesistpa">
+    <meta name="keywords" content="kiesistpa, groupe scolaire, parents, enfant">
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset("css/style.css") }}">
     {% endblock %}
@@ -15,7 +17,7 @@
 <body>
 
     <header>{% block header %}
-            <h1>Groupe Scolaire Kinésistpa</h1>
+            <h1>Groupe Scolaire Kiésistpa</h1>
             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
                 <p> <span>Bonjour {{ app.user.lastname }} {{ app.user.firstname }}</span> <a href=" {{ logout_path('main') }} ">Déconection</a></p>
             {% endif %}

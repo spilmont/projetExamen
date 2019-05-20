@@ -75,6 +75,9 @@ class gradesController extends AbstractController
         $user = $repouser->find($iduser);
         $reposkill = $this->getDoctrine()->getRepository(skill::class);
         $skills = $reposkill->findBy(["class"=>$this->getUser()->getclass() ]);
+        $repograde = $this->getDoctrine()->getRepository(Grade::class);
+        $grades = $repograde->findby(['user'=>$iduser]);
+
 
         if( !empty($_POST)){
 
@@ -97,7 +100,7 @@ class gradesController extends AbstractController
 
 
 
-        return $this->render("admin\creategradetouser.html.twig",['users'=>$user,'skills'=>$skills]);
+        return $this->render("admin\creategradetouser.html.twig",['users'=>$user,'skills'=>$skills,'grades'=>$grades]);
 
     }
 

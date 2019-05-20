@@ -19,7 +19,7 @@ document.querySelectorAll('a#nom').forEach(function (a) {
                     "<a id='noter' href='admin/" + response.data.idgrade + "/gradetouser'>noter</a>"
             }else{
                 document.getElementById('modal').innerHTML =
-                    "<img class='ico' src='https://img.icons8.com/metro/26/000000/delete-sign.png'>" +
+                    "<img class='ico' src='https://img.icons8.com/metro/26/000000/delete-sign.png' alt='fermer la fenetre'>" +
                     "<div>" + response.data.nom + " " + response.data.prenom + "</div><br><br>" +
                     "<a href='/admin/update/" + response.data.id + "'> modifier</a><br>"
             }

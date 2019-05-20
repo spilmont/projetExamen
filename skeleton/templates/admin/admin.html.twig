@@ -8,6 +8,9 @@
         <a class="buttonnav" href="{{ path('user_by_admin') }}">entrer un nouvel élève</a>
         <a class="buttonnav" href="{{ path('show_skill') }}">vers les Matière</a>
         <a class="buttonnav" href="{{ path('choice_grade') }}"> notation  par classe</a>
+        {% if is_granted("ROLE_SUPERADMIN") %}
+            <a class="buttonnav" href="{{ path('create_class') }}"> creer une nouvelle classe</a>
+        {% endif %}
     </nav>
 
 
@@ -71,7 +74,7 @@
             {% endfor %}
         {% endif %}
         {% if class is not empty %}
-            {% for i in user  if i.class == class or  i.id == app.user.id %}
+            {% for i in user  if i.class == class %}
                 <tr>
                     <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
                     <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>

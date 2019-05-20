@@ -12,6 +12,8 @@ use App\Entity\Comments;
 use App\Entity\Skill;
 use App\Entity\User;
 use App\Entity\Grade;
+use App\Repository\CommentsRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Query\Expr\Select;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -60,33 +62,33 @@ class mainController extends securityController
      * */
     public function user(Request $request, User $user)
     {
-         $com = new Comments();
+        $com = new Comments();
 
         $reposkill = $this->getDoctrine()->getRepository(Skill::class);
-        $users = $this->getDoctrine()->getRepository(User::class)->findOneBy(["id"=>$this->getUser()->getIdProf()]);
+        $users = $this->getDoctrine()->getRepository(User::class)->findOneBy(["id" => $this->getUser()->getIdProf()]);
 
         $skills = $reposkill->findAll();
         $repograde = $this->getDoctrine()->getRepository(Grade::class);
         $repocomment = $this->getDoctrine()->getRepository(Comments::class);
-        $comments= $repocomment->findBy([],['id'=>'DESC']);
+        $comments = $repocomment->findBy([], ['id' => 'DESC']);
         $lastname = $user->getLastname();
         $firstname = $user->getFirstname();
-        $usercode  = $user->getUsercode();
+        $usercode = $user->getUsercode();
         $userid = $user->getId();
         $grades = $repograde->findBy(["user" => $user->getId(), "skill" => $skills]);
         $em = $this->getDoctrine()->getManager();
-        $query= $em->createQueryBuilder()->select("s.id","s.skill","avg(g.grades)")->from(Grade::class,'g')->join("g.skill","s")->where("g.user = :studient")->groupby('g.skill')->setparameter('studient',$this->getUser()->getid())->getquery();
+        $query = $em->createQueryBuilder()->select("s.id", "s.skill", "avg(g.grades)")->from(Grade::class, 'g')->join("g.skill", "s")->where("g.user = :studient")->groupby('g.skill')->setparameter('studient', $this->getUser()->getid())->getquery();
         $gradus = $query->getResult();
 
 
         $form = $this->createFormBuilder($com)
-            ->add('comment',TextareaType::class,[ "label"=> false,"attr"=>["placeholder"=>"entreer un commentaire","class"=> "txtarea field"]])
-            ->add('save',SubmitType::class,["label"=>"commenter","attr"=>["class"=> "submit field"]])
+            ->add('comment', TextareaType::class, ["label" => false, "attr" => ["placeholder" => "entreer un commentaire", "class" => "txtarea field"]])
+            ->add('save', SubmitType::class, ["label" => "commenter", "attr" => ["class" => "submit field"]])
             ->getForm();
 
-       $form->handleRequest($request);
+        $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
 
             $com->setReceiver($users);
@@ -96,25 +98,25 @@ class mainController extends securityController
             $em->persist($com);
             $em->flush();
 
-            return  $this->redirectToRoute('user',[ 'lastname' => $lastname,
+            return $this->redirectToRoute('user', ['lastname' => $lastname,
                 "firstname" => $firstname,]);
 
-     }
+        }
 
         $objgrade = json_encode($gradus);
 
         return $this->render('user.html.twig',
             [
-                'gradus'=>$gradus,
-                'usercode'=>$usercode,
+                'gradus' => $gradus,
+                'usercode' => $usercode,
                 'nom' => $lastname,
                 "prenom" => $firstname,
                 "skills" => $skills,
                 'grades' => $grades,
                 "objgrade" => $objgrade,
-                "comments"=>$comments,
-                "formCom"=>$form->createView(),
-                "userid"=>$userid]);
+                "comments" => $comments,
+                "formCom" => $form->createView(),
+                "userid" => $userid]);
 
 
     }
@@ -122,24 +124,70 @@ class mainController extends securityController
     /**
      * @Route("/user/totalgrades/{selectskill}/{lastname}/{firstname}",name="total_grades")
      */
-    public function totalgrade(User $user, $selectskill ){
+    public function totalgrade(User $user, $selectskill)
+    {
 
         $reposkill = $this->getDoctrine()->getRepository(Skill::class);
         $repograde = $this->getDoctrine()->getRepository(Grade::class);
-        $skills = $reposkill->findOneBy(["id"=>$selectskill]);
-        $grades = $repograde->findBy([ "skill" => $skills,"user"=>$user]);
+        $skills = $reposkill->findOneBy(["id" => $selectskill]);
+        $grades = $repograde->findBy(["skill" => $skills, "user" => $user]);
 
         $gradeskills = [];
         $totalgrades = [];
-        foreach ($grades as $grade){
+        foreach ($grades as $grade) {
 
-            $gradeskills []=$grade->getskill()->getskill();
-            $totalgrades []=$grade->getgrades();
+            $gradeskills [] = $grade->getskill()->getskill();
+            $totalgrades [] = $grade->getgrades();
 
         }
-        return $this->json(["skills"=>$gradeskills,"grades"=>$totalgrades],200);
+        return $this->json(["skills" => $gradeskills, "grades" => $totalgrades], 200);
     }
 
 
+    /**
+     * @param CommentsRepository $commentsRepository
+     * @param $id
+     * @Route("/delete/comment/{lastname}/{firstname}/{id}",name="delete_user_comment")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteComment(CommentsRepository $commentsRepository, $id,$lastname,$firstname)
+    {
+
+
+        $comment = $commentsRepository->find($id);
+
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($comment);
+        $em->flush();
+
+
+        return $this->redirectToRoute("user",["lastname"=>$lastname,"firstname"=>$firstname]);
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/update/comment/{lastname}/{firstname}/{id}",name="update_user_comment")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function updatecomment(Request $request,ObjectManager $manager,CommentsRepository $commentsRepository, $id,$lastname,$firstname){
+
+        $comment =  $commentsRepository->find($id);
+
+        $form = $this->createFormBuilder($comment)
+            ->add('comment',TextareaType::class,["label"=>false,"attr"=>["class"=>"field textcom"]])
+            ->add('envoyer',SubmitType::class,["attr"=>["class"=>"field"]])
+            ->getForm();
+
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() and $form->isValid() ){
+
+            $manager->flush();
+            return $this->redirectToRoute("user",["lastname"=>$lastname,"firstname"=>$firstname]);
+        }
+        return $this->render('updatecomment.html.twig',["comment"=> $form->createView()]);
+
+    }
 
 }

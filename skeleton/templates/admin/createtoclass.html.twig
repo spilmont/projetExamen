@@ -1,10 +1,10 @@
-{# page for fill in a form  for create a new student#}
+{# page for fill in a form  for create a new class#}
 {% extends 'base.html.twig' %}
 
 {% block body %}
     <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
     <div class="center-form"><div class="formulaire"><fieldset>
-                <legend> Administrateur : entrer un nouvel utilisateur</legend>
-                {{ form(user) }}
+                <legend> Administrateur : entrer une nouvel classe</legend>
+                {{ form(class) }}
             </fieldset></div></div>
 {% endblock %}

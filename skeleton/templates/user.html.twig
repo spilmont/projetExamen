@@ -35,7 +35,7 @@
         </div>
 
 
-        <div class="formulaire-com">{{ form(formCom) }} </div>
+        <div class="textform">{{ form(formCom) }} </div>
     <div id="comment-main-box">
 
         <div id="comment-title" >Correspondance Professeur/Parent</div>
@@ -44,6 +44,10 @@
             {% if app.user.id == comment.receiver.id or app.user.id == comment.sender.id %}
             <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} les parents de {% else %} le professeur {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
             <p class="commentaire">{{ comment.comment | nl2br }}</p>
+                {% if app.user.id == comment.sender.id %}
+                    <a href="{{ path("delete_user_comment",{'id':comment.id,'lastname': nom,"firstname":prenom}) }}">supprimer</a>
+                    <a href="{{ path("update_user_comment",{'id':comment.id,'lastname': nom,"firstname":prenom}) }}">modifier</a>
+                {% endif %}
 
             {% endif %}
         {% endfor %}

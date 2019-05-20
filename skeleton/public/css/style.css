@@ -7,6 +7,10 @@ p{
     font-size:  24px;
 }
 
+.return{
+    margin-left: 2%;
+    margin-top: 20px;
+}
 
 body{
    margin: 0;
@@ -16,8 +20,15 @@ body{
 
 }
 
+.textform{
+    margin: auto;
+    text-align: center;
+    width: 70%;
+}
+
 #form_comment{
-    width: 344px ;
+    width: 50%;
+    text-align: center;
 }
 
 #moyenne{
@@ -28,7 +39,7 @@ body{
 
 main{
     background-color: #222222;
-    background-image: url("https://www.expressions-venissieux.fr/wp-content/uploads/2016/05/Parilly-257.jpg");
+    background-image: url("../images/Parilly-257.jpg");
     background-size: cover;
     height: 80%;
 
@@ -37,10 +48,9 @@ main{
 aside
 {
     background-color: rgba(255,255,255,0.9);
-    min-height: 100%;
+    min-height: 700px;
     width: 80%;
     margin: auto;
-    text-align: center;
     padding-bottom: 2%;
 }
 
@@ -48,6 +58,7 @@ aside
 footer{
     background-color: cornflowerblue;
     height: 110px;
+
 
 
 }
@@ -87,8 +98,19 @@ h1{
     width: 90%;
     display: flex;
     flex-wrap: wrap;
-    height: 200px;
+   overflow: hidden;
+    margin-bottom: 2%;
 
+}
+@supports (word-wrap: anywhere ) {
+    .commentaire{
+        padding-left: 20px;
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        word-wrap: anywhere;
+
+    }
 }
 
 
@@ -162,8 +184,13 @@ input{
     width: 80%;
     border: red solid ;
     border-radius: 20px;
+    padding-bottom: 2%;
 
     margin: auto;
+}
+#comment-main-box>.buttonnav{
+text-align: center;
+    margin-left:90% ;
 }
 #comment-title{
     border-bottom: red solid;
