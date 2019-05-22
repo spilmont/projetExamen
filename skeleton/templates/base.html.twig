@@ -19,7 +19,7 @@
     <header>{% block header %}
             <h1>Groupe Scolaire Kiésistpa</h1>
             {% if is_granted("IS_AUTHENTICATED_FULLY") %}
-                <p> <span>Bonjour {{ app.user.lastname }} {{ app.user.firstname }}</span> <a href=" {{ logout_path('main') }} ">Déconection</a></p>
+                <p> <span>Bonjour, {% if is_granted('ROLE_SUPERADMIN') %}Directeur {% elseif is_granted("ROLE_ADMIN") %}Proffesseur {% else %}Parents de{% endif %} {{ app.user.lastname }} {{ app.user.firstname }}</span> <a href=" {{ logout_path('main') }} ">Déconection</a></p>
             {% endif %}
             {% endblock %}
     </header>

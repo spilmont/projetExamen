@@ -6,11 +6,20 @@
 
     {% block header %}
         {% include 'security/login.html.twig' %}
+        <a href="{{ path('reset') }}">mot de passe oublié</a>
+
     {% endblock %}
 
 {% block body %}
-    <p>Bienvenues cher parents,<br>
-        Ce site vous permet de voir les note de votre enfants dans les different matiere,<br>
-        ainsi q'un espace commentaire pour pouvoir communiquer avec le profeseur de votre enfant.<br></p>
+    <p>Bienvenus cher parents,<br>
+        Ce site vous permet de voir les note de votre enfants dans les differentes matieres,<br>
+        ainsi q'un espace de messagerie privée pour pouvoir communiquer avec le profeseur de votre enfant.<br></p>
+
+    <script>
+        {% for message in app.flashes('success') %}
+        alert('{{ message }}');
+        {% endfor %}
+    </script>
+
 {% endblock %}
 

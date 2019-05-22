@@ -20,6 +20,7 @@ use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,6 +54,7 @@ class adminController extends AbstractController
             $form = $this->createFormBuilder($user)
                 ->add('lastname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"nom"]])
                 ->add('firstname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"prenom"]])
+                ->add('email', EmailType::class, ['label' => false,"attr"=>["placeholder"=>"email"]])
                 ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
                 ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
                 ->add('class',EntityType::class,[
@@ -76,6 +78,7 @@ class adminController extends AbstractController
         $form = $this->createFormBuilder($user)
             ->add('lastname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"nom"]])
             ->add('firstname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"prenom"]])
+            ->add('email', EmailType::class, ['label' => false,"attr"=>["placeholder"=>"email"]])
             ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
             ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
             ->add('save', SubmitType::class,["attr"=>["class"=>"field"]])
@@ -188,6 +191,7 @@ class adminController extends AbstractController
             $form = $this->createFormBuilder($user)
                 ->add('lastname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"nom"]])
                 ->add('firstname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"prenom"]])
+                ->add('email', EmailType::class, ['label' => false,"attr"=>["placeholder"=>"email"]])
                 ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
                 ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
                 ->add('class',EntityType::class,[
@@ -211,6 +215,7 @@ class adminController extends AbstractController
             $form = $this->createFormBuilder($user)
                 ->add('lastname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"nom"]])
                 ->add('firstname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"prenom"]])
+                ->add('email', EmailType::class, ['label' => false,"attr"=>["placeholder"=>"email"]])
                 ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
                 ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
                 ->add('save', SubmitType::class,["attr"=>["class"=>"field"]])
@@ -284,6 +289,8 @@ class adminController extends AbstractController
                 ->add('lastname', TextType::class, ['label' => false, 'required' => false,"attr"=>['placeholder'=>"filtrer par nom","class"=>"field"]])
                 ->add('class',EntityType::class,[
                     "class"=>User::class,
+                    "placeholder"=> "classe",
+                    "empty_data"=> 36,
                     'choice_label' => 'class',
                     'query_builder' => function (UserRepository $er) {
                         return $er->createQueryBuilder('s')
@@ -292,7 +299,7 @@ class adminController extends AbstractController
                             ->groupBy('s.class')
                            ;
                     },
-                    "attr"=>["class"=>"field"]
+                    "attr"=>["class"=>"field","placeholder"=>"classes"]
                 ])
                 ->add('save', SubmitType::class, ['label' => 'filtrer',"attr"=>["class"=>"field"]])
                 ->getForm();
@@ -452,6 +459,7 @@ class adminController extends AbstractController
              ->add('class',TextType::class,["label"=>false,"attr"=>["placeholder"=>"nouvelle class"]])
              ->add('lastname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"nom du professeur"]])
              ->add('firstname', TextType::class, ['label' => false,"attr"=>["placeholder"=>"prenom du professeur"]])
+             ->add('email', EmailType::class, ['label' => false,"attr"=>["placeholder"=>"email"]])
              ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
              ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code utilisateur"]])
              ->add('save', SubmitType::class,["attr"=>["class"=>"field"]])

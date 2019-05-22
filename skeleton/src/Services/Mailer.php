@@ -9,7 +9,13 @@
 namespace App\Services;
 
 
+
+use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
+
+/**
+ * Class Mailer
+ */
 
 class Mailer
 {
@@ -18,12 +24,17 @@ class Mailer
 
     public function __construct(\Swift_Mailer $mailer, Environment $engine)
     {
+
+
         $this->engine = $engine;
         $this->mailer = $mailer;
     }
 
     public function sendMessage($from, $to, $subject, $body, $attachement = null)
     {
+
+
+
         $mail = (new \Swift_Message($subject))
             ->setFrom($from)
             ->setTo($to)

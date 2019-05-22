@@ -10,13 +10,15 @@ namespace App\Controller;
 
 
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Skill;
 use Symfony\Component\Routing\Annotation\Route;
+
 // controller for CRUD For  skill panel
 
 class skillController extends AbstractController
@@ -58,6 +60,7 @@ class skillController extends AbstractController
     }
 
     /**
+  
      * @Route("admin/skill", name="show_skill")
      */
     public function show(){

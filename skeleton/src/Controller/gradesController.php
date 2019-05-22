@@ -79,11 +79,11 @@ class gradesController extends AbstractController
         $grades = $repograde->findby(['user'=>$iduser]);
 
 
-        if( !empty($_POST)){
+
 
             foreach ($skills as $skill){
                 $grades = new Grade();
-
+                if( !empty($_POST["grade".$skill->getId()])){
                 $formgrade = filter_var($_POST["grade".$skill->getId()],FILTER_SANITIZE_NUMBER_INT);
 
                 $grades->setSkill($skill);
@@ -94,7 +94,7 @@ class gradesController extends AbstractController
                 $em->flush();
 
 
-            }
+                }else{}
         }
 
 

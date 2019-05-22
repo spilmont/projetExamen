@@ -81,6 +81,8 @@ class mainController extends securityController
         $gradus = $query->getResult();
 
 
+
+
         $form = $this->createFormBuilder($com)
             ->add('comment', TextareaType::class, ["label" => false, "attr" => ["placeholder" => "entreer un commentaire", "class" => "txtarea field"]])
             ->add('save', SubmitType::class, ["label" => "commenter", "attr" => ["class" => "submit field"]])
@@ -189,5 +191,6 @@ class mainController extends securityController
         return $this->render('updatecomment.html.twig',["comment"=> $form->createView()]);
 
     }
+
 
 }
