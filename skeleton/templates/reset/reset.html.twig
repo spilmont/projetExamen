@@ -2,8 +2,10 @@
 
 {% block body %}
 <h1>Mot de passe oublié ?</h1>
-<p>Demandez à réinitialiser votre mot de passe en renseignant votre mail.</p>
-{{ form(reset) }}
+    <a class="buttonnav" href="{{ path('homepage') }}"> retour a l'accueil</a>
+<p class="margin left">Demandez à réinitialiser votre mot de passe en renseignant votre mail.</p>
+
+<div class="formulaire"> {{ form(reset) }}</div>
     {% for message in app.flashes('error') %}
         <div class="alert alert-success">
             {{ message }}

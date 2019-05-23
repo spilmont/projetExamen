@@ -2,7 +2,9 @@
 
 
 {% block body %}
-    <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
+    <h1> messagerie privée  </h1>
+
+    <a class="buttonnav" href="{{ path('admin') }}"> retour au panneau des utilisateurs</a>
 <div class="textform">{{ form(formCom) }}</div>
 <div id="comment-main-box">
 
@@ -12,12 +14,14 @@
 
         {% if app.user.id == comment.sender.id and comment.receiver.id == sender or app.user.id == comment.receiver.id and comment.sender.id == sender  %}
             <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} le professeur{% elseif comment.sender.idrank ==2 %} Le directeur {% else %}les parents de  {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
-            <span class="commentaire">{{ comment.comment }}</span>
-            <a href="{{ path("delete_comment",{'id':comment.id,'idstudient':sender}) }}">supprimer</a>
-            <a href="{{ path("update_comment",{'id':comment.id,'idstudient':sender}) }}">modifier</a>
+            <span class="commentaire">{{ comment.comment |nl2br }}</span>
+            <a class="buttonnav" href="{{ path("update_comment",{'id':comment.id,'idstudient':sender}) }}">modifier</a>
+            <a class="buttonnav" href="{{ path("delete_comment",{'id':comment.id,'idstudient':sender}) }}">supprimer</a>
 
         {% endif %}
     {% endfor %}
 
 </div>
 {% endblock %}
+
+

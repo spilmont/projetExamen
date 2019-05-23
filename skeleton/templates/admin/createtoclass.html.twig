@@ -2,9 +2,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
-    <div class="center-form"><div class="formulaire"><fieldset>
-                <legend> Administrateur : entrer une nouvel classe</legend>
+    <h1> Administrateur : entrer une nouvelle classe</h1>
+
+    <a class="buttonnav" href="{{ path('admin') }}"> retour au panneau des utilisateurs</a>
+
+    <div class="formulaire">
                 {{ form(class) }}
-            </fieldset></div></div>
+        </div>
 {% endblock %}

@@ -45,8 +45,8 @@
             <h5>posté le {{ comment.date }} par {% if app.user.id == comment.sender.id %} les parents de {% else %} le professeur {% endif %}    {{ comment.sender.lastname }} {{ comment.sender.firstname }}</h5>
             <p class="commentaire">{{ comment.comment | nl2br }}</p>
                 {% if app.user.id == comment.sender.id %}
-                    <a href="{{ path("delete_user_comment",{'id':comment.id,'lastname': nom,"firstname":prenom}) }}">supprimer</a>
-                    <a href="{{ path("update_user_comment",{'id':comment.id,'lastname': nom,"firstname":prenom}) }}">modifier</a>
+                    <a class="buttonnav" href="{{ path("delete_user_comment",{'id':comment.id,'lastname': nom,"firstname":prenom}) }}">supprimer</a>
+                    <a  class="buttonnav" href="{{ path("update_user_comment",{'id':comment.id,'lastname': nom,"firstname":prenom}) }}">modifier</a>
                 {% endif %}
 
             {% endif %}
@@ -54,11 +54,20 @@
 
 
     </div>
+        <a class="buttonnav margin" href="{{ path("delete_mail",{"id":app.user.id}) }}">supprimer le compte</a>
 
         <script  src="{{ asset("js/Axios.js") }}"></script>
 
 
     <script type="text/javascript">
+
+        {% for message in app.flashes('delete') %}
+        alert('{{ message }}');
+        document.location.href= "/logout";
+        {% endfor %}
+
+
+
         function onclickdivskill(event){
             event.preventDefault();
 

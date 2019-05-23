@@ -2,9 +2,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Panneau administrateur</h1>
+    <h1>Panneau des utilisateurs</h1>
 
-    <nav id="navigation">
+    <nav class="navigation">
         <a class="buttonnav" href="{{ path('user_by_admin') }}">entrer un nouvel {% if is_granted("ROLE_ADMIN") %}élève{% else %}utilisateur{% endif %}</a>
         <a class="buttonnav" href="{{ path('show_skill') }}">vers les Matière</a>
         <a class="buttonnav" href="{{ path('choice_grade') }}"> notation  par classe</a>
@@ -24,7 +24,7 @@
             <th>prenom</th>
             <th class="mdp hide">mot de passe</th>
             <th>code utilisateur</th>
-            <th>id_rank</th>
+            <th class="hide">id_rank</th>
             <th>class</th>
             <th class="hide">messagerie</th>
             <th class="hide">note</th>
@@ -33,14 +33,14 @@
             {% for i in user %}
 
                 <tr>
-                    <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                    <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> supprimer </a></td>
                     <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
                     <td><a id="nom" href="{{ path('ajax_link',{'id':i.id}) }}">{{ i.id }}</a></td>
                     <td>{{ i.lastname }}</td>
                     <td>{{ i.firstname }}</td>
                     <td class="mdp hide">{{ i.password }}</td>
                     <td>{{ i.usercode }}</td>
-                    <td>{{ i.idrank }}</td>
+                    <td class="hide">{{ i.idrank }}</td>
                     <td>{{ i.class }}</td>
                     {% if i.idrank == 3  and i.class == app.user.class %}
                     <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
@@ -55,14 +55,14 @@
         {% if lastname is not empty %}
             {% for i in user  if i.lastname == lastname %}
                 <tr>
-                    <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                    <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> supprimer </a></td>
                     <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
                     <td><a id="nom" href="{{ path('ajax_link',{'id':i.id}) }}">{{ i.id }}</a></td>
                     <td>{{ i.lastname }}</td>
                     <td>{{ i.firstname }}</td>
                     <td class="mdp hide">{{ i.password }}</td>
                     <td>{{ i.usercode }}</td>
-                    <td>{{ i.idrank }}</td>
+                    <td class="hide">{{ i.idrank }}</td>
                     <td>{{ i.class }}</td>
                     {% if i.idrank == 3  and i.class == app.user.class %}
                     <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>
@@ -76,14 +76,14 @@
         {% if class is not empty %}
             {% for i in user  if i.class == class %}
                 <tr>
-                    <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> suprimer </a></td>
+                    <td class="hide"><a href="{{ path('remove_user',{'id': i.id }) }}"> supprimer </a></td>
                     <td class="hide"><a href="{{ path('update_user',{'id': i.id }) }}"> modifier</a></td>
                     <td><a id="nom" href="{{ path('ajax_link',{'id':i.id}) }}">{{ i.id }}</a></td>
                     <td>{{ i.lastname }}</td>
                     <td>{{ i.firstname }}</td>
                     <td class="hide">{{ i.password }}</td>
                     <td>{{ i.usercode }}</td>
-                    <td>{{ i.idrank }}</td>
+                    <td class="hide">{{ i.idrank }}</td>
                     <td>{{ i.class }}</td>
                     {% if i.idrank == 3  and i.class == app.user.class %}
                     <td class="hide"><a href="{{ path('message',{'idstudient':i.id}) }}">messagerie</a></td>

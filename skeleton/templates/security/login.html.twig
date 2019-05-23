@@ -1,22 +1,6 @@
 
 
-{% block header %}
-    <h1>Groupe Scolaire Kiésitpa</h1>
-    <form  action="{{ path('login') }}" method="post">
-        <div class="connection"><label for="usercode">code utilisateur : </label>
-        <input type="text" id="usercode" name="_username" value="{{ last_username }}"></div>
 
-        <div class="connection pass">
-        <label for="password">mot de passe : </label>
-        <input type="password" id="password" name="_password">
-        </div>
-
-        <button type="submit">connection</button>
-    </form>
-    {% if error %}
-    <div id="error" >Code utilisateur ou mot de passe incorect</div>
-{% endif %}
-{% endblock %}
 {% block body %}
 
 {% endblock %}

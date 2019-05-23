@@ -122,6 +122,7 @@ class gradesController extends AbstractController
             ->add('skill',EntityType::class,[
                 "class"=>Skill::class,
                 'choice_label' => 'skill',
+                "label"=>false,
                 'query_builder' => function (SkillRepository $er) {
                     return $er->createQueryBuilder('s')
                         ->select('s')

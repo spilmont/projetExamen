@@ -5,20 +5,40 @@
 
 
     {% block header %}
-        {% include 'security/login.html.twig' %}
-        <a href="{{ path('reset') }}">mot de passe oublié</a>
+            <h1>Groupe Scolaire Kiésitpa</h1>
+            <div class="formlog">
+                <form  action="{{ path('login') }}" method="post">
+
+                    <div class="connection"><label for="usercode">code utilisateur : </label>
+                        <input class="" type="text" id="usercode" name="_username" value="{{ last_username }}"></div>
+
+                    <div class="connection pass">
+                        <label for="password">mot de passe : </label>
+                        <input type="password" id="password" name="_password">
+                    </div>
+
+                    <button class="buttonradius" type="submit">connection</button>
+                </form>
+            </div>
+            {% if error %}
+                <div class="left" id="error" >Code utilisateur ou mot de passe incorect</div>
+            {% endif %}
+
+        <a  class="mdpo" href="{{ path('reset') }}">mot de passe oublié</a>
 
     {% endblock %}
 
 {% block body %}
-    <p>Bienvenus cher parents,<br>
-        Ce site vous permet de voir les note de votre enfants dans les differentes matieres,<br>
+    <p class="padding">Bienvenus les parents,<br>
+        Ce site vous permez de voir les notes de votre enfant dans les differentes matieres,<br>
         ainsi q'un espace de messagerie privée pour pouvoir communiquer avec le profeseur de votre enfant.<br></p>
 
     <script>
         {% for message in app.flashes('success') %}
         alert('{{ message }}');
         {% endfor %}
+        
+
     </script>
 
 {% endblock %}

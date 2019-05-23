@@ -15,6 +15,7 @@ use App\Entity\Grade;
 use App\Repository\CommentsRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Query\Expr\Select;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,6 +23,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
@@ -85,7 +88,7 @@ class mainController extends securityController
 
         $form = $this->createFormBuilder($com)
             ->add('comment', TextareaType::class, ["label" => false, "attr" => ["placeholder" => "entreer un commentaire", "class" => "txtarea field"]])
-            ->add('save', SubmitType::class, ["label" => "commenter", "attr" => ["class" => "submit field"]])
+            ->add('save', SubmitType::class, ["label" => "commenter", "attr" => ["class" => "submit field listederoulante"]])
             ->getForm();
 
         $form->handleRequest($request);
@@ -191,6 +194,8 @@ class mainController extends securityController
         return $this->render('updatecomment.html.twig',["comment"=> $form->createView()]);
 
     }
+
+
 
 
 }

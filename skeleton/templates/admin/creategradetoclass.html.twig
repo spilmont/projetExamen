@@ -2,14 +2,16 @@
 
 
 {% block body %}
-    <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
     <h1> enregistrement des notes de {{ skill }} de la classe de {{ users[0].class }}</h1>
+
+    <a class="buttonnav" href="{{ path('admin') }}"> retour au panneau des utilisateurs</a>
+
 
     <div class="formgrade">
     <form  method="post" action="">
         {% for user in users if user.idrank ==3 %}
             <label for="grade{{ user.id }}">{{ user.lastname }} {{ user.firstname}}</label>
-            <input  type="number" name="grade{{ user.id }}" id="grade{{ user.id }}" min="0" max="20"><br>
+            <input class="fieldgrade"  type="number" name="grade{{ user.id }}" id="grade{{ user.id }}" min="0" max="20"><br>
         {% endfor %}
         <input type="submit">
     </form>

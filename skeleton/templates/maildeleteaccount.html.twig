@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>supression de votre compte</title>
+</head>
+<body>
+<p>
+    Bonjour, <br>
+    Cliquez sur ce lien pour supprimer votre compte.
+
+    <a href="{{absolute_url(path('delete_account', {'id': user.id, 'token': user.token}))}}">pour supprimer votre compte </a><br><br>
+
+    Attention toute suppression de compte est definitive.
+</p>
+</body>
+</html>

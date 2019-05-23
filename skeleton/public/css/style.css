@@ -6,6 +6,34 @@ p{
     padding-left: 10px;
     font-size:  24px;
 }
+.formlog{
+    margin-left: 2%;
+    display: flex;
+
+}
+.buttonradius{
+    border-radius: 20px;
+}
+
+#form{
+    margin-top: 2%;
+}
+.mdpo{
+
+    margin-left: 2%;
+    color: white;
+}
+
+.margin{
+    margin-top: 2%;
+}
+.padding{
+    padding-top: 2%;
+}
+
+.left{
+    margin-left: 2%;
+}
 
 .return{
     margin-left: 2%;
@@ -65,7 +93,7 @@ footer{
 header{
     background-color: cornflowerblue;
 
-    height: 110px;
+    height: 135px;
     color: white;
 }
 
@@ -84,14 +112,20 @@ h1{
     display: none;
     padding: 10px;
     margin: 0 45% 0 45%;
-    top: 50%;
+    top: 70%;
     border-radius: 20px;
 
     position: absolute;
     border: #222222 solid;
     background-color: white;
+}
 
-
+.deconnection{
+    background-color: white;
+    border-radius: 20px;
+   padding-left: 2%;
+    padding-right: 2%;
+    text-decoration: none;
 }
 .commentaire{
     padding-left: 20px;
@@ -102,13 +136,13 @@ h1{
     margin-bottom: 2%;
 
 }
-@supports (word-wrap: anywhere ) {
+@supports (line-break: anywhere ) {
     .commentaire{
         padding-left: 20px;
         width: 90%;
         display: flex;
         flex-wrap: wrap;
-        word-wrap: anywhere;
+        line-break: anywhere;
 
     }
 }
@@ -116,8 +150,9 @@ h1{
 
 
 .formgrade{
-    width: 25%;
-    text-align: right;
+    width: 50%;
+    margin: 5%;
+
 }
 
 #filter{
@@ -130,8 +165,21 @@ input{
 }
 .field{
     border-radius: 20px;
-    margin-bottom: 5px;
     text-align: center;
+    display: block;
+    margin: auto;
+    margin-bottom: 5px;
+}
+.fieldgrade{
+    border-radius: 20px;
+    text-align: center;
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+.listederoulante{
+margin-bottom: 1.5%;
 }
 
 #error{
@@ -145,6 +193,8 @@ input{
     background-color: cornflowerblue;
     color: white;
     border-radius: 20px;
+    margin-left: 2%;
+
 
 
 }
@@ -166,11 +216,12 @@ input{
 
 
 .formulaire{
-    width: 13%;
+
+    width: 50%;
     line-height: 200%;
     text-align: center;
     margin: auto;
-
+    margin-top: 3.5%;
 }
 .formulaire-com{
     width: 60%;
@@ -185,13 +236,15 @@ input{
     border: red solid ;
     border-radius: 20px;
     padding-bottom: 2%;
-
     margin: auto;
+    margin-bottom: 2%;
 }
 #comment-main-box>.buttonnav{
 text-align: center;
-    margin-left:90% ;
+    margin-left: 2%;
+    ;
 }
+
 #comment-title{
     border-bottom: red solid;
     font-size: 20px;
@@ -218,12 +271,15 @@ legend{
 }
 table{
     margin: auto;
+    margin-top: 2%;
     text-align: center;
     border-radius: 20px;
 }
 
 
-#navigation{
+
+
+.navigation{
     text-align: center;
     margin-bottom: 10px;
 }
@@ -256,7 +312,7 @@ table{
         }
 
         .connection {
-            display: block;
+
         }
 
         .pass {
@@ -295,7 +351,7 @@ table{
             border: #222222 solid;
         }
 
-        #navigation > a {
+        .navigation > a {
             text-align: center;
             margin-left: auto;
             margin-right: auto;

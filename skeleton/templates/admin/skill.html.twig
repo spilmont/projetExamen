@@ -2,11 +2,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('admin') }}"> retour au panneaus des utilisateurs</a>
-    <h1>Panneau fes matières</h1>
 
-    <nav>
-        <a class="buttonnav" href="{{ path('create_skill') }}">entrer une nouvelle matière</a>
+    <h1>Panneau des matières</h1>
+<nav class="navigation">
+
+<a class="buttonnav" href="{{ path('admin') }}"> retour au panneau des utilisateurs</a>
+    <a class="buttonnav" href="{{ path('create_skill') }}">entrer une nouvelle matière</a>
+
     </nav>
     <table>
         <tr>

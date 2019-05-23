@@ -57,7 +57,9 @@ class adminController extends AbstractController
                 ->add('email', EmailType::class, ['label' => false,"attr"=>["placeholder"=>"email"]])
                 ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
                 ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
+                ->add('idrank', ChoiceType::class, ["label"=>false,"choices"=>["Professeur"=>1,"éleve"=>3],"attr"=>["class"=>"field listederoulante"]])
                 ->add('class',EntityType::class,[
+                    "label"=>false,
                     "class"=>User::class,
                     'choice_label' => 'class',
                     'query_builder' => function (UserRepository $er) {
@@ -69,9 +71,8 @@ class adminController extends AbstractController
                             ->orWhere("s.idrank = 2")
                             ->setParameter('rank',1);
                     },
-                    "attr"=>["class"=>"field"]
+                    "attr"=>["class"=>"field listederoulante"]
                 ])
-                ->add('idrank', ChoiceType::class, ["label"=>false,"choices"=>["Professeur"=>1,"éleve"=>3]])
                 ->add('save', SubmitType::class,["attr"=>["class"=>"field"]])
                 ->getForm();
         }else{
@@ -194,9 +195,11 @@ class adminController extends AbstractController
                 ->add('email', EmailType::class, ['label' => false,"attr"=>["placeholder"=>"email"]])
                 ->add('plainPassword', PasswordType::class, ['label' => false,"attr"=>["placeholder"=>"mot de passe"]])
                 ->add('usercode', TextType::class, ['label' => false,"attr"=>["placeholder"=>"code élève"]])
+                ->add('idrank', ChoiceType::class, ["label"=>false,"choices"=>["Professeur"=>1,"Directeur"=>2,"éleve"=>3],"attr"=>["class"=>"field"]])
                 ->add('class',EntityType::class,[
                     "class"=>User::class,
                     'choice_label' => 'class',
+                    "label"=>false,
                     'query_builder' => function (UserRepository $er) {
                         return $er->createQueryBuilder('s')
                             ->select('s')
@@ -208,7 +211,7 @@ class adminController extends AbstractController
                     },
                     "attr"=>["class"=>"field"]
                 ])
-                ->add('idrank', ChoiceType::class, ["label"=>false,"choices"=>["Professeur"=>1,"Directeur"=>2,"éleve"=>3]])
+
                 ->add('save', SubmitType::class,["attr"=>["class"=>"field"]])
                 ->getForm();
         }else{
@@ -286,8 +289,9 @@ class adminController extends AbstractController
 
         if($this->isGranted('ROLE_SUPERADMIN')) {
             $form = $this->createFormBuilder($user)
-                ->add('lastname', TextType::class, ['label' => false, 'required' => false,"attr"=>['placeholder'=>"filtrer par nom","class"=>"field"]])
+                ->add('lastname', TextType::class, ['label' => false, 'required' => false,"attr"=>['placeholder'=>"filtrer par nom","class"=>"field margin"]])
                 ->add('class',EntityType::class,[
+                    "label"=>false,
                     "class"=>User::class,
                     "placeholder"=> "classe",
                     "empty_data"=> 36,
@@ -299,16 +303,16 @@ class adminController extends AbstractController
                             ->groupBy('s.class')
                            ;
                     },
-                    "attr"=>["class"=>"field","placeholder"=>"classes"]
+                    "attr"=>["class"=>"field margin","placeholder"=>"classes"]
                 ])
-                ->add('save', SubmitType::class, ['label' => 'filtrer',"attr"=>["class"=>"field"]])
+                ->add('save', SubmitType::class, ['label' => 'filtrer',"attr"=>["class"=>"field margin"]])
                 ->getForm();
 
 
         }else{
             $form = $this->createFormBuilder($user)
-                ->add('lastname', TextType::class, ['label' => false, 'required' => false,"attr"=>['placeholder'=>"filtrer par nom","class"=>"field"]])
-                ->add('save', SubmitType::class, ['label' => 'filtrer',"attr"=>["class"=>"field"]])
+                ->add('lastname', TextType::class, ['label' => false, 'required' => false,"attr"=>['placeholder'=>"filtrer par nom","class"=>"field margin"]])
+                ->add('save', SubmitType::class, ['label' => 'filtrer',"attr"=>["class"=>"field margin"]])
                 ->getForm();
         }
 
@@ -351,7 +355,7 @@ class adminController extends AbstractController
 
         $form = $this->createFormBuilder($com)
             ->add('comment',TextareaType::class,["label"=>false,"attr"=>['placeholder'=>"entrer un message","class"=>"field"]])
-            ->add('envoyer',SubmitType::class,["attr"=>["class"=>"field"]])
+            ->add('envoyer',SubmitType::class,["attr"=>["class"=>"field listederoulante"]])
             ->getForm();
 
         $form->handleRequest($request);

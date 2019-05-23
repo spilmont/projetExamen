@@ -41,9 +41,9 @@ class resetController extends AbstractController
             'constraints'=>[
                 new Email(),
                 new NotBlank()
-            ]
+            ],
        ])
-           ->add('envoyer', SubmitType::class)
+           ->add('envoyer', SubmitType::class,["attr"=>["class"=>"buttonradius"]])
            ->getForm();
 
        $form->handleRequest($request);
@@ -68,7 +68,7 @@ class resetController extends AbstractController
 
           $bodyEmail = $mailer->createBodyMail('reset/mail.html.twig',["user"=>$user]);
 
-          $mailer->sendMessage('spilmont204@gmail.com', $user->getEmail(),'renouvellement de mot de passe', $bodyEmail);
+          $mailer->sendMessage('spilmont204@free.fr', $user->getEmail(),'renouvellement de mot de passe', $bodyEmail);
         ;
            $this->addFlash('success', "Un mail va vous être envoyé afin que vous puissiez renouveller votre mot de passe. Le lien que vous recevrez sera valide 24h.");
 
@@ -93,7 +93,7 @@ class resetController extends AbstractController
        $now = new \DateTime();
        $interval = $now->getTimestamp() - $passwordResetdAt->getTimestamp();
 
-       $time = 60*10;
+       $time = 60*60*24;
        $reponse = $interval>$time ? false : $reponse = true;
        return $reponse;
 
@@ -111,11 +111,11 @@ class resetController extends AbstractController
        $form = $this->createFormBuilder($user)
            ->add('plainPassword',RepeatedType::class,[
                'type'=>PasswordType::class,
-               'first_options'=>['label'=>'entrer nouveau mot de passe'],
-               'second_options'=>['label'=>'retapper le mot de passe'],
+               'first_options'=>['label'=>'entrer nouveau mot de passe',"attr"=>["class"=>"fieldgrade "]],
+               'second_options'=>['label'=>'retapper le mot de passe',"attr"=>["class"=>"fieldgrade "]],
                'invalid_message'=>"les mots de passe ne s'ont pas identiques"
            ])
-           ->add('enregistrer',SubmitType::class)
+           ->add('enregistrer',SubmitType::class,["attr"=>["class"=>'buttonradius']])
            ->getForm();
 
         $form->handleRequest($request);
@@ -140,5 +140,55 @@ class resetController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("deleteaccount/{id}/{token}",name="delete_account");
+     */
+    public function deleteaccount( Request $request,User $user, $token ){
+
+        if($user->getToken() == null || $token != $user->getToken() || !$this->ResetTime($user->getPasswordRequestedAt())){
+            throw new AccessDeniedHttpException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirect("/");
+
+
+    }
+
+    /**
+     * @Route("/deletemail/{id}", name="delete_mail")
+     */
+    public function delete(Request $request, Mailer $mailer, TokenGeneratorInterface $tokenGenerator,$id){
+
+
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+
+
+
+
+
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user->setToken($tokenGenerator->generateToken());
+
+            $user->setPasswordRequestedAt(new \DateTime());
+
+
+            $bodyEmail = $mailer->createBodyMail('maildeleteaccount.html.twig',["user"=>$user]);
+
+            $mailer->sendMessage('spilmont204@free.fr', $user->getEmail(),'suppression du compte', $bodyEmail);
+        $em->flush();
+           $this->addFlash('delete', "Un mail va vous être envoyé afin que vous puissiez suprimer votre compte. Le lien que vous recevrez sera valide 24h.");
+
+        return $this->redirectToRoute("homepage");
+
+        }
+
 
 }
